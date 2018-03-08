@@ -183,6 +183,12 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+        try {
+            Runtime.getRuntime().exec( "wscript Welcome.vbs" );
+        }
+        catch( IOException e ) {
+            System.out.println("No script");
+        }
         logger.info("Starting AddressBook " + MainApp.VERSION);
         ui.start(primaryStage);
     }
