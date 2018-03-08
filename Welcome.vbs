@@ -1,4 +1,4 @@
-speaks="Welcome back"
+speaks="Welcome"
 
 Set speech=CreateObject("sapi.spvoice")
 
