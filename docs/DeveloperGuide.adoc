@@ -10,7 +10,7 @@ ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
 endif::[]
-:repoURL: https://github.com/se-edu/addressbook-level4/tree/master
+:repoURL: https://github.com/CS2103JAN2018-T16-B2/main
 
 By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
 
@@ -808,7 +808,23 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* *` |user |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident
 
-|`*` |user with many persons in the address book |sort persons by name |locate a person easily
+|`* * *` |user with many persons in the address book |sort persons by name, address |locate a person easily
+
+|`* * *` |user with many deliveries in the address book |sort deliveries by date, priority |make my planning
+
+|`* * *` |driver |quickly indicate that I have completed a delivery |always know which are the remaining parcels that I have to deliver
+
+|`* * *` |driver |be able to communicate with the customer |resolve any delivery issues I face
+
+|`* * *` |customer |receive updates about my parcel |know when it's gonna come
+
+|`* *` |driver |be able to find the optimal route to the next destination easily |focus on just driving to the next location
+
+|`*` |driver|my whole day by ordering the deliveries I want to do |avoid losing time during the day
+
+|`*` |driver |have users automatically downloaded from a central database |avoid having to add users one by one myself
+
+|`*` |driver |get traffic updates |follow my schedule
 |=======================================================================
 
 _{More to be added}_
@@ -843,6 +859,41 @@ Use case ends.
 ** 3a1. AddressBook shows an error message.
 +
 Use case resumes at step 2.
+
+[discrete]
+=== Use case: Deliver a package to a specific customer
+
+*MSS*
+
+1. User enters the package reference
+2. Address book outputs the customer's information (availabilities, address)
+3. User clicks on the customer’s address
+4. Address book open the itinerary to the customer’s address on Google Maps
+5. User can drive to the customer’s location
++
+Use case ends.
+
+*Extensions*
+
+* 2a. The given package reference is invalid.
++
+[none]
+** 2a1. AddressBook shows an error message.
++
+Use case resumes at step 1.
+
+[discrete]
+=== Use case: Mapping the route for the day
+
+*MSS*
+
+1. User requests to list the database ordered by date of delivery
+2. Address book outputs the list of deliveries
+3. User selects all the addresses and runs the “map” command on the selected addresses
+4. Address book displays a mapped out route for the day with an ideal time to begin the route
+5. User can start the delivery
++
+Use case ends.
 
 _{More to be added}_
 
