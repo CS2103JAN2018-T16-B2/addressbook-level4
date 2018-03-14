@@ -32,11 +32,11 @@ public class DeleteCommandSystemTest extends AddressBookSystemTest {
 
         /* Case: delete the first person in the list, command with leading spaces and trailing spaces -> deleted */
         Model expectedModel = getModel();
-        String command = "     " + DeleteCommand.COMMAND_WORD + "      " + INDEX_FIRST_PERSON.getOneBased() + "       ";
+        String rawCommand = "     " + DeleteCommand.COMMAND_WORD + "      " + INDEX_FIRST_PERSON.getOneBased() + "       ";
+        String command = rawCommand.trim();
         Person deletedPerson = removePerson(expectedModel, INDEX_FIRST_PERSON);
         String expectedResultMessage = String.format(MESSAGE_DELETE_PERSON_SUCCESS, deletedPerson);
         assertCommandSuccess(command, expectedModel, expectedResultMessage);
-
         /* Case: delete the last person in the list -> deleted */
         Model modelBeforeDeletingLast = getModel();
         Index lastPersonIndex = getLastIndex(modelBeforeDeletingLast);
@@ -163,7 +163,7 @@ public class DeleteCommandSystemTest extends AddressBookSystemTest {
      * @see AddressBookSystemTest#assertSelectedCardChanged(Index)
      */
     private void assertCommandSuccess(String command, Model expectedModel, String expectedResultMessage,
-            Index expectedSelectedCardIndex) {
+                                      Index expectedSelectedCardIndex) {
         executeCommand(command);
         assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);
 
