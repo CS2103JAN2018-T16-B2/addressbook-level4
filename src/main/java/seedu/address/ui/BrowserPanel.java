@@ -45,7 +45,17 @@ public class BrowserPanel extends UiPart<Region> {
      * Show direction from Kent Ridge MRT to the person address
      */
     private void loadPersonDirection(Person person) {
-        loadPage(SEARCH_PAGE_URL + person.getAddress().value + ",+Singapore");
+        String addressValue = person.getAddress().value.trim();
+        int stringCutIndex;
+        String addressWithoutUnit;
+
+        if (addressValue.indexOf('#') > 2) {
+            stringCutIndex = addressValue.indexOf('#') - 2;
+            addressWithoutUnit = addressValue.substring(0, stringCutIndex);
+        }
+        else addressWithoutUnit = addressValue;
+
+        loadPage(SEARCH_PAGE_URL + addressWithoutUnit + "?dg=dbrw&newdg=1");
     }
 
     public void loadPage(String url) {
