@@ -17,6 +17,9 @@ public interface Model {
     /** Clears existing backing model and replaces with the provided new data. */
     void resetData(ReadOnlyAddressBook newData);
 
+    /** Copies existing backing model and replaces with sorted data. */
+    void sortData();
+
     /** Returns the AddressBook */
     ReadOnlyAddressBook getAddressBook();
 

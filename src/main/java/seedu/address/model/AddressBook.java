@@ -2,21 +2,18 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PersonComparatorByName;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
+import seedu.address.storage.StorageManager;
 
 /**
  * Wraps all data at the address-book level
@@ -69,6 +66,23 @@ public class AddressBook implements ReadOnlyAddressBook {
                 .map(this::syncWithMasterTagList)
                 .collect(Collectors.toList());
 
+        try {
+            setPersons(syncedPersonList);
+        } catch (DuplicatePersonException e) {
+            throw new AssertionError("AddressBooks should not have duplicate persons");
+        }
+    }
+
+
+    /**
+     * Sorts the existing data of this {@code AddressBook} with {@code newData}.
+     */
+    public void sortData() {
+        ReadOnlyAddressBook newData = this;
+        requireNonNull(newData);
+        List<Person> syncedPersonList = newData.getPersonList();
+        PersonComparatorByName personComparatorByName = new PersonComparatorByName();
+        syncedPersonList.sort(personComparatorByName);
         try {
             setPersons(syncedPersonList);
         } catch (DuplicatePersonException e) {
