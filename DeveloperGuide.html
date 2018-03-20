@@ -5,14 +5,14 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.6.1">
-<title>AddressBook Level 4 - Developer Guide</title>
+<title>Pigeons - Developer Guide</title>
 <link rel="stylesheet" href="stylesheets/gh-pages.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
 <link rel="stylesheet" href="stylesheets/coderay-asciidoctor.css">
 </head>
 <body class="article">
 <div id="header">
-<h1>AddressBook Level 4 - Developer Guide</h1>
+<h1>Pigeons - Developer Guide</h1>
 </div>
 <div id="content">
 <div id="preamble">
@@ -80,7 +80,11 @@
 <li><a href="#GetStartedProgramming-RemarkCommand">A.2. Creating a new command: <code>remark</code></a></li>
 </ul>
 </li>
-<li><a href="#product-scope">Appendix B: Product Scope</a></li>
+<li><a href="#product-scope">Appendix B: Product Scope</a>
+<ul class="sectlevel2">
+<li><a href="#feature-contribution">B.1. Feature contribution</a></li>
+</ul>
+</li>
 <li><a href="#user-stories">Appendix C: User Stories</a></li>
 <li><a href="#use-cases">Appendix D: Use Cases</a></li>
 <li><a href="#non-functional-requirements">Appendix E: Non Functional Requirements</a></li>
@@ -1898,18 +1902,21 @@ for <code>RemarkCommandParser</code>.</p>
 <h2 id="product-scope"><a class="link" href="#product-scope">Appendix B: Product Scope</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
+<p>Delivery system for drivers with a database of deliveries and locations to map the optimal route in a handsfree offline system.</p>
+</div>
+<div class="paragraph">
 <p><strong>Target user profile</strong>:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>has a need to manage a significant number of contacts</p>
+<p>has a need to manage deliveries</p>
 </li>
 <li>
 <p>prefer desktop apps over other types</p>
 </li>
 <li>
-<p>can type fast</p>
+<p>requires audio cues while driving and using the program</p>
 </li>
 <li>
 <p>prefers typing over mouse input</p>
@@ -1927,12 +1934,52 @@ for <code>RemarkCommandParser</code>.</p>
 <p>may require to add contacts on the go occasionally quickly</p>
 </li>
 <li>
-<p>may like to be able to communicate with addressees</p>
+<p>may like to be able to communicate with addresses</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p><strong>Value proposition</strong>: manage contacts faster than a typical mouse/GUI driven app while being accessible easily on the go</p>
+<p><strong>Value proposition</strong>: manage deliveries faster than a typical GUI driven app while being accessible easily on the go and
+maps out ideal routes for drivers</p>
+</div>
+<div class="sect2">
+<h3 id="feature-contribution"><a class="link" href="#feature-contribution">B.1. Feature contribution</a></h3>
+<div class="paragraph">
+<p><strong>Shi Kang</strong></p>
+</div>
+<div class="paragraph">
+<p>Minor: ability for correspondence with each addressee</p>
+</div>
+<div class="paragraph">
+<p>Major: Login for each delivery driver to own a separate list of addresses in his customised address book</p>
+</div>
+<div class="paragraph">
+<p><strong>Meera</strong></p>
+</div>
+<div class="paragraph">
+<p>Minor: adding delivery date field</p>
+</div>
+<div class="paragraph">
+<p>Major:  Route optimization for the deliveries on each date</p>
+</div>
+<div class="paragraph">
+<p><strong>Matthieu</strong></p>
+</div>
+<div class="paragraph">
+<p>Minor : simplifying the input</p>
+</div>
+<div class="paragraph">
+<p>Major: Email updates/correspond with the users that are awaiting a delivery</p>
+</div>
+<div class="paragraph">
+<p><strong>Minh</strong></p>
+</div>
+<div class="paragraph">
+<p>Minor: Adding google maps and handsfree sound feature</p>
+</div>
+<div class="paragraph">
+<p>Major: Mapping out the routes for delivery and displaying on google maps</p>
+</div>
 </div>
 </div>
 </div>
@@ -2054,55 +2101,6 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="sectionbody">
 <div class="paragraph">
 <p>(For all use cases below, the <strong>System</strong> is the <code>AddressBook</code> and the <strong>Actor</strong> is the <code>user</code>, unless specified otherwise)</p>
-</div>
-<h3 id="use-case-delete-person" class="discrete">Use case: Delete person</h3>
-<div class="paragraph">
-<p><strong>MSS</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>User requests to list persons</p>
-</li>
-<li>
-<p>AddressBook shows a list of persons</p>
-</li>
-<li>
-<p>User requests to delete a specific person in the list</p>
-</li>
-<li>
-<p>AddressBook deletes the person</p>
-<div class="paragraph">
-<p>Use case ends.</p>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p><strong>Extensions</strong></p>
-</div>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>2a. The list is empty.</p>
-<div class="paragraph">
-<p>Use case ends.</p>
-</div>
-</li>
-<li>
-<p>3a. The given index is invalid.</p>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>3a1. AddressBook shows an error message.</p>
-<div class="paragraph">
-<p>Use case resumes at step 2.</p>
-</div>
-</li>
-</ul>
-</div>
-</li>
-</ul>
 </div>
 <h3 id="use-case-deliver-a-package-to-a-specific-customer" class="discrete">Use case: Deliver a package to a specific customer</h3>
 <div class="paragraph">
@@ -2366,46 +2364,13 @@ Expected: Similar to previous.</p>
 <div class="paragraph">
 <p><em>{ more test cases &#8230;&#8203; }</em></p>
 </div>
-<div class="paragraph">
-<p>==Product scope</p>
-</div>
-<div class="paragraph">
-<p>Delivery system for drivers with a database of deliveries and locations to map the optimal route in a handsfree offline system.</p>
-</div>
-<div class="paragraph">
-<p>==Feature contribution</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Shi Kang
-Major: Login for each delivery driver to own a separate list of addresses in his customised address book
-Minor: ability for correspondence with each addressee</p>
-</li>
-<li>
-<p>Meera
-Minor: adding delivery date tag
-Major:  prioritizing deliveries</p>
-</li>
-<li>
-<p>Matthieu
-Minor : simplifying the input
-Major: beautify the UI</p>
-</li>
-<li>
-<p>Minh
-Minor: Adding google maps and handsfree sound feature
-Major: Mapping out the routes for delivery</p>
-</li>
-</ol>
-</div>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-03-20 04:48:19 UTC
+Last updated 2018-03-20 06:12:18 UTC
 </div>
 </div>
 </body>
