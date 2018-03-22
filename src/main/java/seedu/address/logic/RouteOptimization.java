@@ -33,7 +33,7 @@ public class RouteOptimization {
     /**
      * Build Google Map API Geo context with API key
      */
-    private GeoApiContext buildGeoContext() {
+    private static GeoApiContext buildGeoContext() {
         GeoApiContext context = new GeoApiContext.Builder()
                 .apiKey("AIzaSyBWyCJkCym1dSouzHX_FxLk6Tj11C7F0Ao")
                 .build();

@@ -1,8 +1,12 @@
 package seedu.address.ui;
 
+import java.io.IOException;
 import java.util.logging.Logger;
 
+import com.google.maps.errors.ApiException;
+
 import javafx.collections.ObservableList;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
@@ -105,7 +109,7 @@ public class CommandBox extends UiPart<Region> {
      * Handles the Enter button pressed event.
      */
     @FXML
-    private void handleCommandInputChanged() {
+    private void handleCommandInputChanged() throws InterruptedException, ApiException, IOException {
         try {
             CommandResult commandResult = logic.execute(commandTextField.getText());
             initHistory();
