@@ -58,7 +58,9 @@ public class RouteOptimization {
             String value1 = entry1.getValue();
             for (Map.Entry<String, String> entry2 : filtered.entrySet()) {
                 String key2 = entry2.getKey();
-                if (hash1 > System.identityHashCode(key2)) { continue; }
+                if (hash1 > System.identityHashCode(key2)) {
+                    continue;
+                }
                 String value2 = entry2.getValue();
                 allDistances.put(labelRoutes(value1, value2, filtered), distance.getDistance(value1, value2));
             }
