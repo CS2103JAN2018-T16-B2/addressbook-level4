@@ -9,6 +9,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.NewResultAvailableEvent;
+import seedu.address.logic.Autocompleter;
 import seedu.address.logic.ListElementPointer;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
@@ -58,7 +59,7 @@ public class CommandBox extends UiPart<Region> {
 
         case TAB:
             keyEvent.consume();
-            commandTextField.appendText(logic.autocomplete(commandTextField.getText()));
+            commandTextField.appendText(new Autocompleter(logic).autocomplete(commandTextField.getText()));
             break;
 
         default:

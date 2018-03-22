@@ -378,21 +378,6 @@ image::UndoRedoActivityDiagram.png[width="650"]
 ** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two * different things.
 // end::undoredo[]
 
-// tag::autocompletion[]
-=== Autocompletion feature
-
-We use an `Autocompleter` class which stores the list of `Command` and all the different fields (`Name`, `Address`, etc) created in the `LogicManager`.
-The `Autocompleter` can complete:
-
-* a command word, if it's the first of a query
-* an option, starting by "n/" for example
-* a name, if the current query doesn't match the first two cases: if we only have "John Doe" in the `AddressBook` we can complete the query by either "John" or "Doe" (this is useful to complete the `FindCommand`).
-
-This class is used in `CommandBox` which send the content of the command line and then append the result of the autocomplete operation.
-
-
-// end::autocompletion[]
-
 // tag::dataencryption[]
 === [Proposed] Data Encryption
 

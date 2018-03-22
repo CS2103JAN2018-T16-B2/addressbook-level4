@@ -2,7 +2,6 @@ package seedu.address.logic;
 
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -18,23 +17,24 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
-import seedu.address.model.person.Person;
 
 /**
  * Implements methods to autocomplete commands and fields in a user query
  */
 public class Autocompleter {
 
+    private Logic logic;
+
     private final Set<String> commandsList = new HashSet<>();
     private Set<String> names;
     private Set<String> phones;
     private Set<String> emails;
-    private Set<String> addresses;
-    private Set<String> dates;
+    private Set<String> adresses;
 
-    public Autocompleter(List<Person> data) {
+    public Autocompleter(Logic logic) {
+        this.logic = logic;
         updateCommands();
-        updateFields(data);
+        updateFields();
     }
 
     /**
@@ -53,7 +53,7 @@ public class Autocompleter {
         } else if (words.length > 1) { //trying to complete a field
 
             int lastFieldIndex = input.lastIndexOf('/');
-            //testing whether the field is an option starting by 'x/'
+            //testing wether the field is an option starting by 'x/'
             if (lastFieldIndex > 0 && input.substring(lastFieldIndex).length() > 0) {
                 String field = input.substring(lastFieldIndex + 1);
                 Set<String> fieldsList;
@@ -72,11 +72,7 @@ public class Autocompleter {
                     break;
 
                 case 'a':
-                    fieldsList = addresses;
-                    break;
-
-                case 'd':
-                    fieldsList = dates;
+                    fieldsList = adresses;
                     break;
 
                 default:
@@ -88,14 +84,14 @@ public class Autocompleter {
             } else {
                 //the last word of the query doesn't correspond to a command
                 // and doesn't correspond to an option starting with 'x/'
-                //so we're trying to match the last word to a name of the address book
-                possibilities = generatePossibleSuffixes(words[words.length - 1], generateNames());
+                //so we're trying to match the last word to a name of the adress book
+
+                possibilities = generatePossibleSuffixes(words[words.length - 1], names);
+                if (possibilities.size() == 0) {
+                    possibilities = generatePossibleSuffixes(words[words.length - 1], generateNames());
+                }
             }
         }
-        return getLongestCommonPrefix(possibilities);
-    }
-
-    private String getLongestCommonPrefix(Set<String> possibilities) {
         String longestCommonPrefix = "";
 
         if (possibilities.size() > 0) {
@@ -140,17 +136,15 @@ public class Autocompleter {
     /**
      * Update the sets of fields
      */
-    public void updateFields(List<Person> data) {
-        names = data.stream()
+    private void updateFields() {
+        names = logic.getFilteredPersonList().stream()
                 .map(person -> person.getName().toString()).collect(Collectors.toSet());
-        phones = data.stream()
+        phones = logic.getFilteredPersonList().stream()
                 .map(person -> person.getPhone().toString()).collect(Collectors.toSet());
-        emails = data.stream()
+        emails = logic.getFilteredPersonList().stream()
                 .map(person -> person.getEmail().toString()).collect(Collectors.toSet());
-        addresses = data.stream()
+        adresses = logic.getFilteredPersonList().stream()
                 .map(person -> person.getAddress().toString()).collect(Collectors.toSet());
-        dates = data.stream()
-                .map(person -> person.getDate().toString()).collect(Collectors.toSet());
     }
 
     /**
