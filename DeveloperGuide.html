@@ -45,12 +45,13 @@
 </li>
 <li><a href="#implementation">3. Implementation</a>
 <ul class="sectlevel2">
-<li><a href="#login-feature">3.1. Login feature</a></li>
-<li><a href="#undo-redo-feature">3.2. Undo/Redo feature</a></li>
-<li><a href="#autocompletion-feature">3.3. Autocompletion feature</a></li>
-<li><a href="#proposed-data-encryption">3.4. [Proposed] Data Encryption</a></li>
-<li><a href="#logging">3.5. Logging</a></li>
-<li><a href="#Implementation-Configuration">3.6. Configuration</a></li>
+<li><a href="#route-optimization-feature">3.1. Route Optimization feature</a></li>
+<li><a href="#login-feature">3.2. Login feature</a></li>
+<li><a href="#undo-redo-feature">3.3. Undo/Redo feature</a></li>
+<li><a href="#autocompletion-feature">3.4. Autocompletion feature</a></li>
+<li><a href="#proposed-data-encryption">3.5. [Proposed] Data Encryption</a></li>
+<li><a href="#logging">3.6. Logging</a></li>
+<li><a href="#Implementation-Configuration">3.7. Configuration</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a>
@@ -598,9 +599,40 @@ such that each user (Pigeon/Delivery Driver) can have a personalised list of cus
 <p>This section describes some noteworthy details on how certain features are implemented.</p>
 </div>
 <div class="sect2">
-<h3 id="login-feature"><a class="link" href="#login-feature">3.1. Login feature</a></h3>
+<h3 id="route-optimization-feature"><a class="link" href="#route-optimization-feature">3.1. Route Optimization feature</a></h3>
+<div class="paragraph">
+<p>Since this program is meant for deliveries the route for the daily delivery must be optimized for the user.
+The RouteOptimization class will get the distance (getDistance function in GetDistance class) between all the addresses for the day.</p>
+</div>
+<div class="paragraph">
+<p>The addresses will then be sorted based on optimal sortest route.
+Example:
+3 deliveries for a day at Point A, B, C</p>
+</div>
+<div class="paragraph">
+<p>Point A -&#8594; Point B = 14km (12min)
+Point A -&#8594; Point C = 13km (13min)
+Point C -&#8594; Point B = 12km (10min)</p>
+</div>
+<div class="paragraph">
+<p>Optimal Route = Point A -&#8594; Point C -&#8594; Point B (based on least about of km travelled)</p>
+</div>
+<div class="paragraph">
+<p>In the RouteOptimization class the sorting function will be responsible to determine the optimal route once the distances are obtained</p>
+</div>
+<div class="paragraph">
+<p>To getDistance - google API is required to get the geocodes for the locations and the DistanceMatrix can be obtained
+Once the matrix is obtained the distances between the places can be recorded.
+The addresses will be obtained for the filtered list in the database.</p>
+</div>
+<div class="paragraph">
+<p>The optimized route will the be fed into a mapping function to display the route and get the directions for the driver.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="login-feature"><a class="link" href="#login-feature">3.2. Login feature</a></h3>
 <div class="sect3">
-<h4 id="current-implementation"><a class="link" href="#current-implementation">3.1.1. Current Implementation</a></h4>
+<h4 id="current-implementation"><a class="link" href="#current-implementation">3.2.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>The login feature is facilitated by a <code>UserPassStorage</code> that stores all <code>UserPass</code> (username and password pair of Strings) created before in the application.
 Each time a user attempts a login, a <code>UserPass</code> is created based on their inputs for username and password, and verified against the <code>UserPassStorage</code>.
@@ -617,9 +649,9 @@ Upon successful verification, the user will be brought to a user-customised vers
 </div>
 </div>
 <div class="sect2">
-<h3 id="undo-redo-feature"><a class="link" href="#undo-redo-feature">3.2. Undo/Redo feature</a></h3>
+<h3 id="undo-redo-feature"><a class="link" href="#undo-redo-feature">3.3. Undo/Redo feature</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">3.2.1. Current Implementation</a></h4>
+<h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">3.3.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>The undo/redo mechanism is facilitated by an <code>UndoRedoStack</code>, which resides inside <code>LogicManager</code>. It supports undoing and redoing of commands that modifies the state of the address book (e.g. <code>add</code>, <code>edit</code>). Such commands will inherit from <code>UndoableCommand</code>.</p>
 </div>
@@ -772,7 +804,7 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations"><a class="link" href="#design-considerations">3.2.2. Design Considerations</a></h4>
+<h4 id="design-considerations"><a class="link" href="#design-considerations">3.3.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-implementation-of-code-undoablecommand-code"><a class="link" href="#aspect-implementation-of-code-undoablecommand-code">Aspect: Implementation of <code>UndoableCommand</code></a></h5>
 <div class="ulist">
@@ -909,7 +941,7 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 </div>
 </div>
 <div class="sect2">
-<h3 id="autocompletion-feature"><a class="link" href="#autocompletion-feature">3.3. Autocompletion feature</a></h3>
+<h3 id="autocompletion-feature"><a class="link" href="#autocompletion-feature">3.4. Autocompletion feature</a></h3>
 <div class="paragraph">
 <p>We use an <code>Autocompleter</code> class which stores the list of <code>Command</code> and all the different fields (<code>Name</code>, <code>Address</code>, etc) created in the <code>LogicManager</code>.
 The <code>Autocompleter</code> can complete:</p>
@@ -932,20 +964,20 @@ The <code>Autocompleter</code> can complete:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.4. [Proposed] Data Encryption</a></h3>
+<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.5. [Proposed] Data Encryption</a></h3>
 <div class="paragraph">
 <p><em>{Explain here how the data encryption feature will be implemented}</em></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">3.5. Logging</a></h3>
+<h3 id="logging"><a class="link" href="#logging">3.6. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.6, &#8220;Configuration&#8221;</a>)</p>
+<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.7, &#8220;Configuration&#8221;</a>)</p>
 </li>
 <li>
 <p>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level</p>
@@ -976,7 +1008,7 @@ The <code>Autocompleter</code> can complete:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.6. Configuration</a></h3>
+<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.7. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
@@ -2441,7 +2473,7 @@ Expected: Similar to previous.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-03-22 06:37:34 UTC
+Last updated 2018-03-22 06:42:15 UTC
 </div>
 </div>
 </body>
