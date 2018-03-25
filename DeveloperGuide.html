@@ -582,6 +582,16 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 <p>allows for users to login to a specific instance of the Pigeons address book,
 such that each user (Pigeon/Delivery Driver) can have a personalised list of customers to deliver to.</p>
 </li>
+<li>
+<p>provides an interface for managing the entire login process with usernames and passwords
+in a paired structure <code>UserPass</code> stored in a json file in the implemented class <code>JsonUserPassStorage</code>
+which implements <code>UserPassStorage</code>.</p>
+</li>
+<li>
+<p><code>UserPass</code> consists of two Strings, the first being the username and the second being the password.
+The password is automatically hashed by the SHA-256 algorithm upon <code>UserPass</code> creation. A static <code>hash</code> method
+is provided in the <code>UserPass</code> class if SHA-256 hashing is required for any password verification.</p>
+</li>
 </ul>
 </div>
 </div>
@@ -2485,7 +2495,7 @@ Expected: Similar to previous.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-03-25 06:00:28 UTC
+Last updated 2018-03-25 08:23:56 UTC
 </div>
 </div>
 </body>
