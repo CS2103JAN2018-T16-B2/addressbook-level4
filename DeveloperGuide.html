@@ -52,7 +52,7 @@
 <li><a href="#proposed-data-encryption">3.5. [Proposed] Data Encryption</a></li>
 <li><a href="#logging">3.6. Logging</a></li>
 <li><a href="#Implementation-Configuration">3.7. Configuration</a></li>
-<li><a href="#focus-retrieving-distance-from-a-person-address-to-another-person-address">3.8. [Focus] Retrieving distance from a person address to another person address</a></li>
+<li><a href="#retrieving-distance-from-a-person-address-to-another-person-address">3.8. Retrieving distance from a person address to another person address</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a>
@@ -1030,9 +1030,26 @@ The <code>Autocompleter</code> can complete:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="focus-retrieving-distance-from-a-person-address-to-another-person-address"><a class="link" href="#focus-retrieving-distance-from-a-person-address-to-another-person-address">3.8. [Focus] Retrieving distance from a person address to another person address</a></h3>
+<h3 id="retrieving-distance-from-a-person-address-to-another-person-address"><a class="link" href="#retrieving-distance-from-a-person-address-to-another-person-address">3.8. Retrieving distance from a person address to another person address</a></h3>
+<div class="sect3">
+<h4 id="current-implementation-3"><a class="link" href="#current-implementation-3">3.8.1. Current Implementation</a></h4>
 <div class="paragraph">
-<p>Retrieving distance from different address is a starting step to be able to build a optimized map for delivering.</p>
+<p>Like other commands, distance command uses the <code>AddressBookParser</code> class to parse the user command. The result of the command execution is encapsulated as a CommandResult object which is passed back to the Ui.</p>
+</div>
+<div class="paragraph">
+<p>The distance command execution won&#8217;t affect the <code>Model</code> or raise any events since it only return the distance result.</p>
+</div>
+<div class="paragraph">
+<p>However, the result is depend on the <code>GetDistance</code> class which will using the <code>Google Map API</code> to calculate the distance from the HQ to the person address.</p>
+</div>
+<div class="paragraph">
+<p>The following sequence diagram shows how the <code>distance</code> command works:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/getDistanceOfPersonSdForLogic.png" alt="getDistanceOfPersonSdForLogic" width="800">
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -2495,7 +2512,7 @@ Expected: Similar to previous.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-03-25 08:23:56 UTC
+Last updated 2018-03-25 08:29:43 UTC
 </div>
 </div>
 </body>
