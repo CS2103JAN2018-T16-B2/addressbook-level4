@@ -247,10 +247,11 @@ Format: `clear`
 === Finding distance : `distance`
 
 Finds the distance from the headquarter to the person address. +
-Format: `distance`
+Format: `distance INDEX (INDEX)`
 
 ****
-* Selects the person and loads the distance from the headquarter to the person address `INDEX`.
+* Selects the person and loads the distance from the headquarter to the person address `INDEX`. Or selects 2 person and
+load the distance from the first person to the second person.
 * The index refers to the index number shown in the most recent listing.
 * The index *must be a positive integer* `1, 2, 3, ...`
 ****
@@ -258,11 +259,11 @@ Format: `distance`
 Examples:
 
 * `list` +
-`distance 2` +
-Return the distance from the headquarter to the 2nd person in the address book.
+`distance 2 3` +
+Return the distance from the 2nd person to the 3rd person in the address book.
 * `find Betsy` +
 `distance 1` +
-Return the distance from the headquarter to the 1st person in the address book.
+Return the distance from the headquarter to the 1st person name Betsy in the address book.
 
 === Exiting the program : `exit`
 
@@ -306,6 +307,8 @@ e.g. `find James Jake`
 * *Help* : `help`
 * *Select* : `select INDEX` +
 e.g.`select 2`
+* *Distance* : `distance INDEX (INDEX)` +
+e.g.`distance 2`
 * *History* : `history`
 * *Undo* : `undo`
 * *Redo* : `redo`

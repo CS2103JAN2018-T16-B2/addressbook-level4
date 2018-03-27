@@ -18,9 +18,16 @@ public class DistanceCommandParser implements Parser<DistanceCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public DistanceCommand parse(String args) throws ParseException {
+        String[] selectedIndexes = args.split(" ");
         try {
-            Index index = ParserUtil.parseIndex(args);
-            return new DistanceCommand(index);
+            if (selectedIndexes.length == 3) {
+                Index firstIndex = ParserUtil.parseIndex(selectedIndexes[1].trim());
+                Index secondIndex = ParserUtil.parseIndex(selectedIndexes[2].trim());
+                return new DistanceCommand(firstIndex, secondIndex);
+            } else {
+                Index index = ParserUtil.parseIndex(args);
+                return new DistanceCommand(index);
+            }
         } catch (IllegalValueException ive) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DistanceCommand.MESSAGE_USAGE));

@@ -46,9 +46,15 @@ public class DistanceCommandTest {
         List<Person> lastShownList = model.getFilteredPersonList();
         Index lastPersonIndex = Index.fromOneBased(lastShownList.size());
 
-        assertExecutionSuccess(lastShownList.get(0), INDEX_FIRST_PERSON);
-        assertExecutionSuccess(lastShownList.get(1), INDEX_SECOND_PERSON);
-        assertExecutionSuccess(lastShownList.get(lastPersonIndex.getZeroBased()), lastPersonIndex);
+        Person firstPerson = lastShownList.get(0);
+        Person secondPerson = lastShownList.get(1);
+        Person lastPerson = lastShownList.get(lastPersonIndex.getZeroBased());
+
+        assertOnePersonExecutionSuccess(firstPerson, INDEX_FIRST_PERSON);
+        assertOnePersonExecutionSuccess(secondPerson, INDEX_SECOND_PERSON);
+        assertOnePersonExecutionSuccess(lastPerson, lastPersonIndex);
+
+        assertTwoPersonExecutionSuccess(firstPerson, INDEX_FIRST_PERSON, secondPerson, INDEX_SECOND_PERSON);
     }
 
     @Test
@@ -63,7 +69,7 @@ public class DistanceCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        assertExecutionSuccess(lastShownList.get(0), INDEX_FIRST_PERSON);
+        assertOnePersonExecutionSuccess(lastShownList.get(0), INDEX_FIRST_PERSON);
     }
 
     @Test
@@ -102,8 +108,8 @@ public class DistanceCommandTest {
     /**
      * Executes a {@code DistanceCommand} with the given {@code person and index}
      */
-    private void assertExecutionSuccess(Person person, Index index) {
-        DistanceCommand distanceCommand = prepareCommand(index);
+    private void assertOnePersonExecutionSuccess(Person person, Index index) {
+        DistanceCommand distanceCommand = prepareOnePersonCommand(index);
 
         try {
             CommandResult commandResult = distanceCommand.execute();
@@ -112,7 +118,32 @@ public class DistanceCommandTest {
             GetDistance route = new GetDistance();
             Double distance = route.getDistance(headQuarterAddress, address);
 
-            assertEquals(String.format(DistanceCommand.MESSAGE_DISTANCE_PERSON_SUCCESS, distance),
+            assertEquals(String.format(DistanceCommand.MESSAGE_DISTANCE_FROM_HQ_SUCCESS, distance),
+                    commandResult.feedbackToUser);
+        } catch (Exception ce) {
+            System.out.println(ce.getMessage());
+            throw new IllegalArgumentException("Execution of command should not fail.", ce);
+        }
+    }
+
+    /**
+     * Executes a {@code DistanceCommand} with the given {@code persons and indexes}
+     */
+    private void assertTwoPersonExecutionSuccess(Person personAtOrigin, Index originIndex,
+                                                 Person personAtDestination, Index destinationIndex) {
+        DistanceCommand distanceCommand = prepareTwoPersonsCommand(originIndex, destinationIndex);
+
+        try {
+            CommandResult commandResult = distanceCommand.execute();
+            String addressOrigin = personAtOrigin.getAddress().toString();
+            String addressDestination = personAtDestination.getAddress().toString();
+            String nameOrigin = personAtOrigin.getName().fullName;
+            String nameDestination = personAtDestination.getName().fullName;
+            GetDistance route = new GetDistance();
+            Double distance = route.getDistance(addressOrigin, addressDestination);
+
+            assertEquals(String.format(DistanceCommand.MESSAGE_DISTANCE_FROM_PERSON_SUCCESS,
+                    nameOrigin, nameDestination, distance),
                     commandResult.feedbackToUser);
         } catch (Exception ce) {
             System.out.println(ce.getMessage());
@@ -125,7 +156,7 @@ public class DistanceCommandTest {
      * is thrown with the {@code expectedMessage}.
      */
     private void assertExecutionFailure(Index index, String expectedMessage) {
-        DistanceCommand distanceCommand = prepareCommand(index);
+        DistanceCommand distanceCommand = prepareOnePersonCommand(index);
 
         try {
             distanceCommand.execute();
@@ -137,10 +168,19 @@ public class DistanceCommandTest {
     }
 
     /**
-     * Returns a {@code DistanceCommand} with parameters {@code index}.
+     * Returns a {@code DistanceCommand} with one parameter {@code index}.
      */
-    private DistanceCommand prepareCommand(Index index) {
+    private DistanceCommand prepareOnePersonCommand(Index index) {
         DistanceCommand distanceCommand = new DistanceCommand(index);
+        distanceCommand.setData(model, new CommandHistory(), new UndoRedoStack());
+        return distanceCommand;
+    }
+
+    /**
+     * Returns a {@code DistanceCommand} with two parameters {@code index}.
+     */
+    private DistanceCommand prepareTwoPersonsCommand(Index originIndex, Index destinationIndex) {
+        DistanceCommand distanceCommand = new DistanceCommand(originIndex, destinationIndex);
         distanceCommand.setData(model, new CommandHistory(), new UndoRedoStack());
         return distanceCommand;
     }
