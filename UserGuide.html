@@ -530,14 +530,15 @@ Format: <code>clear</code></p>
 <h3 id="finding-distance-code-distance-code"><a class="link" href="#finding-distance-code-distance-code">3.13. Finding distance : <code>distance</code></a></h3>
 <div class="paragraph">
 <p>Finds the distance from the headquarter to the person address.<br>
-Format: <code>distance</code></p>
+Format: <code>distance INDEX (INDEX)</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
 <div class="ulist">
 <ul>
 <li>
-<p>Selects the person and loads the distance from the headquarter to the person address <code>INDEX</code>.</p>
+<p>Selects the person and loads the distance from the headquarter to the person address <code>INDEX</code>. Or selects 2 person and
+load the distance from the first person to the second person.</p>
 </li>
 <li>
 <p>The index refers to the index number shown in the most recent listing.</p>
@@ -556,13 +557,13 @@ Format: <code>distance</code></p>
 <ul>
 <li>
 <p><code>list</code><br>
-<code>distance 2</code><br>
-Return the distance from the headquarter to the 2nd person in the address book.</p>
+<code>distance 2 3</code><br>
+Return the distance from the 2nd person to the 3rd person in the address book.</p>
 </li>
 <li>
 <p><code>find Betsy</code><br>
 <code>distance 1</code><br>
-Return the distance from the headquarter to the 1st person in the address book.</p>
+Return the distance from the headquarter to the 1st person name Betsy in the address book.</p>
 </li>
 </ul>
 </div>
@@ -648,6 +649,10 @@ e.g. <code>find James Jake</code></p>
 e.g.<code>select 2</code></p>
 </li>
 <li>
+<p><strong>Distance</strong> : <code>distance INDEX (INDEX)</code><br>
+e.g.<code>distance 2</code></p>
+</li>
+<li>
 <p><strong>History</strong> : <code>history</code></p>
 </li>
 <li>
@@ -681,7 +686,7 @@ e.g.<code>select 2</code></p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-03-27 11:06:36 UTC
+Last updated 2018-03-27 11:28:16 UTC
 </div>
 </div>
 </body>
