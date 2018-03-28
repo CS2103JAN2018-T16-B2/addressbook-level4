@@ -69,7 +69,8 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         userPrefs = initPrefs(userPrefsStorage);
-        AddressBookStorage addressBookStorage = new XmlAddressBookStorage(userPrefs.getAddressBookFilePath());
+        AddressBookStorage addressBookStorage = new XmlAddressBookStorage(
+                userPrefs.getAddressBookFolderPath() + userPrefs.getAddressBookFilePath());
         UserPassStorage userPassStorage = new JsonUserPassStorage(config.getUserPassFilePath());
         storage = new StorageManager(addressBookStorage, userPrefsStorage, userPassStorage);
         StorageManager storageManager = (StorageManager) storage;
@@ -94,7 +95,8 @@ public class MainApp extends Application {
         String profile = login.getUsername();
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(profile + config.getUserPrefsFilePath());
         userPrefs = initPrefs(userPrefsStorage);
-        AddressBookStorage addressBookStorage = new XmlAddressBookStorage(profile + userPrefs.getAddressBookFilePath());
+        AddressBookStorage addressBookStorage = new XmlAddressBookStorage(
+                userPrefs.getAddressBookFolderPath() + profile + userPrefs.getAddressBookFilePath());
         storage = new StorageManager(addressBookStorage, userPrefsStorage, userPassStorage);
         model = initModelManager(storage, userPrefs);
         logic = new LogicManager(model);

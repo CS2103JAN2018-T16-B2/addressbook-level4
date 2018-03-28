@@ -10,7 +10,8 @@ import seedu.address.commons.core.GuiSettings;
 public class UserPrefs {
 
     private GuiSettings guiSettings;
-    private String addressBookFilePath = "data/addressbook.xml";
+    private String addressBookFolderPath = "data/";
+    private String addressBookFilePath = "addressbook.xml";
     private String addressBookName = "MyAddressBook";
 
     public UserPrefs() {
@@ -27,6 +28,14 @@ public class UserPrefs {
 
     public void setGuiSettings(double width, double height, int x, int y) {
         guiSettings = new GuiSettings(width, height, x, y);
+    }
+
+    public String getAddressBookFolderPath() {
+        return addressBookFolderPath;
+    }
+
+    public void setAddressBookFolderPath(String addressBookFolderPath) {
+        this.addressBookFolderPath = addressBookFolderPath;
     }
 
     public String getAddressBookFilePath() {
