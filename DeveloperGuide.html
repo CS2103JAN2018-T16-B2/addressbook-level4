@@ -45,14 +45,16 @@
 </li>
 <li><a href="#implementation">3. Implementation</a>
 <ul class="sectlevel2">
-<li><a href="#route-optimization-feature">3.1. Route Optimization feature</a></li>
-<li><a href="#login-feature">3.2. Login feature</a></li>
-<li><a href="#undo-redo-feature">3.3. Undo/Redo feature</a></li>
-<li><a href="#autocompletion-feature">3.4. Autocompletion feature</a></li>
-<li><a href="#proposed-data-encryption">3.5. [Proposed] Data Encryption</a></li>
-<li><a href="#logging">3.6. Logging</a></li>
-<li><a href="#Implementation-Configuration">3.7. Configuration</a></li>
-<li><a href="#retrieving-distance-from-a-person-address-to-another-person-address">3.8. Retrieving distance from a person address to another person address</a></li>
+<li><a href="#filter-command">3.1. Filter Command</a></li>
+<li><a href="#route-optimization-feature">3.2. Route Optimization feature</a></li>
+<li><a href="#login-feature">3.3. Login feature</a></li>
+<li><a href="#undo-redo-feature">3.4. Undo/Redo feature</a></li>
+<li><a href="#autocompletion-feature">3.5. Autocompletion feature</a></li>
+<li><a href="#mailer-feature">3.6. Mailer feature</a></li>
+<li><a href="#proposed-data-encryption">3.7. [Proposed] Data Encryption</a></li>
+<li><a href="#logging">3.8. Logging</a></li>
+<li><a href="#Implementation-Configuration">3.9. Configuration</a></li>
+<li><a href="#retrieving-distance-from-a-person-address-to-another-person-address">3.10. Retrieving distance from a person address to another person address</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a>
@@ -607,15 +609,19 @@ is provided in the <code>UserPass</code> class if SHA-256 hashing is required fo
 <h2 id="implementation"><a class="link" href="#implementation">3. Implementation</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This section describes some noteworthy details on how certain features are implemented.
-=== Filter Command
-To add to the many commands necessary for users, filtering by date will be essential when trying to optimize the route per day.
+<p>This section describes some noteworthy details on how certain features are implemented.</p>
+</div>
+<div class="sect2">
+<h3 id="filter-command"><a class="link" href="#filter-command">3.1. Filter Command</a></h3>
+<div class="paragraph">
+<p>To add to the many commands necessary for users, filtering by date will be essential when trying to optimize the route per day.
 The filter command was added similar to how the find command has been implemented.
 When the user enters filter by a date in the UI the model with the list of data is updated using the date predicate.
 This updated model is then executed via the CommandResult class and output on the UI. It is stores as a readonly list in the model.</p>
 </div>
+</div>
 <div class="sect2">
-<h3 id="route-optimization-feature"><a class="link" href="#route-optimization-feature">3.1. Route Optimization feature</a></h3>
+<h3 id="route-optimization-feature"><a class="link" href="#route-optimization-feature">3.2. Route Optimization feature</a></h3>
 <div class="paragraph">
 <p>Since this program is meant for deliveries the route for the daily delivery must be optimized for the user.
 The RouteOptimization class will get the distance (getDistance function in GetDistance class) between all the addresses for the day.</p>
@@ -645,7 +651,7 @@ The distance property gives the distance in kilometers from the origin to destin
 <p>The optimized route will the be fed into a mapping function to display the route and get the directions for the driver.</p>
 </div>
 <div class="sect3">
-<h4 id="sorting-addresses"><a class="link" href="#sorting-addresses">3.1.1. Sorting addresses</a></h4>
+<h4 id="sorting-addresses"><a class="link" href="#sorting-addresses">3.2.1. Sorting addresses</a></h4>
 <div class="paragraph">
 <p>Once the distances have been found for all combinations of addresses on that filtered day they get stored in a Map with key: "address1_address2" and
 value: Double distance (in km). This hashmap gets sorted in order of distances and any irrelevant or duplicate calculations are removed.
@@ -658,9 +664,9 @@ will be created as the optimum delivery route.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="login-feature"><a class="link" href="#login-feature">3.2. Login feature</a></h3>
+<h3 id="login-feature"><a class="link" href="#login-feature">3.3. Login feature</a></h3>
 <div class="sect3">
-<h4 id="current-implementation"><a class="link" href="#current-implementation">3.2.1. Current Implementation</a></h4>
+<h4 id="current-implementation"><a class="link" href="#current-implementation">3.3.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>The login feature is facilitated by a <code>UserPassStorage</code> that stores all <code>UserPass</code> (username and password pair of Strings) created before in the application.
 Each time a user attempts a login, a <code>UserPass</code> is created based on their inputs for username and password, and verified against the <code>UserPassStorage</code>.
@@ -677,9 +683,9 @@ Upon successful verification, the user will be brought to a user-customised vers
 </div>
 </div>
 <div class="sect2">
-<h3 id="undo-redo-feature"><a class="link" href="#undo-redo-feature">3.3. Undo/Redo feature</a></h3>
+<h3 id="undo-redo-feature"><a class="link" href="#undo-redo-feature">3.4. Undo/Redo feature</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">3.3.1. Current Implementation</a></h4>
+<h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">3.4.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>The undo/redo mechanism is facilitated by an <code>UndoRedoStack</code>, which resides inside <code>LogicManager</code>. It supports undoing and redoing of commands that modifies the state of the address book (e.g. <code>add</code>, <code>edit</code>). Such commands will inherit from <code>UndoableCommand</code>.</p>
 </div>
@@ -832,7 +838,7 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations"><a class="link" href="#design-considerations">3.3.2. Design Considerations</a></h4>
+<h4 id="design-considerations"><a class="link" href="#design-considerations">3.4.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-implementation-of-code-undoablecommand-code"><a class="link" href="#aspect-implementation-of-code-undoablecommand-code">Aspect: Implementation of <code>UndoableCommand</code></a></h5>
 <div class="ulist">
@@ -969,7 +975,7 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 </div>
 </div>
 <div class="sect2">
-<h3 id="autocompletion-feature"><a class="link" href="#autocompletion-feature">3.4. Autocompletion feature</a></h3>
+<h3 id="autocompletion-feature"><a class="link" href="#autocompletion-feature">3.5. Autocompletion feature</a></h3>
 <div class="paragraph">
 <p>We use an <code>Autocompleter</code> class which stores the list of <code>Command</code> and all the different fields (<code>Name</code>, <code>Address</code>, etc) created in the <code>LogicManager</code>.
 The <code>Autocompleter</code> can complete:</p>
@@ -988,24 +994,37 @@ The <code>Autocompleter</code> can complete:</p>
 </ul>
 </div>
 <div class="paragraph">
-<p>This class is used in <code>CommandBox</code> which send the content of the command line and then append the result of the autocomplete operation.</p>
+<p>After having chosen between one this three cases, we generate a set of all possible suffixes that can be append to the current query. And from this set, we extract the longest common prefix which is the returned <code>String</code> of <code>Autocompleter.autocomplete()</code>.<br>
+For example : if we want to complete the query <code>find J</code> and we have two persons in the address book called <code>John</code> and <code>Jonathan</code>, the set of possible suffixes will be {<code>ohn</code>, <code>onathan</code>} and the longest common prefix is <code>o</code>.
+So the completed query will be <code>find Jo</code>.</p>
+</div>
+<div class="paragraph">
+<p>This class is used in <code>CommandBox</code> which sends the content of the command line and then append the result of the autocomplete operation.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.5. [Proposed] Data Encryption</a></h3>
+<h3 id="mailer-feature"><a class="link" href="#mailer-feature">3.6. Mailer feature</a></h3>
+<div class="paragraph">
+<p>We use an abstract <code>Mailer</code> class which provide a method that sends an email to a list of <code>Person</code>.<br>
+This class uses the JavaMail API to send emails from the address : <a href="mailto:pigeonscs2103@gmail.com">pigeonscs2103@gmail.com</a>.<br>
+We also created a new <code>EmailCommand</code> which simply uses the <code>Mailer</code> class in its redefinition of <code>super.execute()</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.7. [Proposed] Data Encryption</a></h3>
 <div class="paragraph">
 <p><em>{Explain here how the data encryption feature will be implemented}</em></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">3.6. Logging</a></h3>
+<h3 id="logging"><a class="link" href="#logging">3.8. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.7, &#8220;Configuration&#8221;</a>)</p>
+<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.9, &#8220;Configuration&#8221;</a>)</p>
 </li>
 <li>
 <p>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level</p>
@@ -1036,15 +1055,15 @@ The <code>Autocompleter</code> can complete:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.7. Configuration</a></h3>
+<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.9. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="retrieving-distance-from-a-person-address-to-another-person-address"><a class="link" href="#retrieving-distance-from-a-person-address-to-another-person-address">3.8. Retrieving distance from a person address to another person address</a></h3>
+<h3 id="retrieving-distance-from-a-person-address-to-another-person-address"><a class="link" href="#retrieving-distance-from-a-person-address-to-another-person-address">3.10. Retrieving distance from a person address to another person address</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-3"><a class="link" href="#current-implementation-3">3.8.1. Current Implementation</a></h4>
+<h4 id="current-implementation-3"><a class="link" href="#current-implementation-3">3.10.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>Like other commands, distance command uses the <code>AddressBookParser</code> class to parse the user command. The result of the command execution is encapsulated as a CommandResult object which is passed back to the Ui.</p>
 </div>
@@ -2524,7 +2543,7 @@ Expected: Similar to previous.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-03-28 17:42:17 UTC
+Last updated 2018-03-29 04:49:17 UTC
 </div>
 </div>
 </body>
