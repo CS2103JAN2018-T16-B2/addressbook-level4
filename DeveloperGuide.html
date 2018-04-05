@@ -1005,9 +1005,11 @@ So the completed query will be <code>find Jo</code>.</p>
 <div class="sect2">
 <h3 id="mailer-feature"><a class="link" href="#mailer-feature">3.6. Mailer feature</a></h3>
 <div class="paragraph">
-<p>We use an abstract <code>Mailer</code> class which provide a method that sends an email to a list of <code>Person</code>.<br>
+<p>We use an abstract <code>Mailer</code> class which provide a method that sends an email to a list of <code>Person</code>
+and another which sends an itinerary to the driver.<br>
 This class uses the JavaMail API to send emails from the address : <a href="mailto:pigeonscs2103@gmail.com">pigeonscs2103@gmail.com</a>.<br>
-We also created a new <code>EmailCommand</code> which simply uses the <code>Mailer</code> class in its redefinition of <code>super.execute()</code>.</p>
+We also created a new <code>EmailCommand</code> which directly uses the <code>Mailer</code> class in its redefinition of <code>super.execute()</code>.
+The information related to the itinerary are collected by the <code>EmailCommand</code> which creates an instance of <code>RouteOptimization</code>.</p>
 </div>
 </div>
 <div class="sect2">
@@ -2543,7 +2545,7 @@ Expected: Similar to previous.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-05 04:22:49 UTC
+Last updated 2018-04-05 04:50:55 UTC
 </div>
 </div>
 </body>
