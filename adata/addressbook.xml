@@ -51,6 +51,30 @@
         <tagged>fragile</tagged>
         <tagged>priority</tagged>
     </persons>
+    <persons>
+        <name>Test1</name>
+        <phone>93354655</phone>
+        <email>es@nus.edu.sg</email>
+        <address>Boon Lay MRT</address>
+        <date>2018-03-30</date>
+        <tagged>priority</tagged>
+    </persons>
+    <persons>
+        <name>Test2</name>
+        <phone>93354655</phone>
+        <email>es@nus.edu.sg</email>
+        <address>Boon Lay MRT</address>
+        <date>2018-03-30</date>
+        <tagged>priority</tagged>
+    </persons>
+    <persons>
+        <name>Test3</name>
+        <phone>93354655</phone>
+        <email>es@nus.edu.sg</email>
+        <address>Newton MRT</address>
+        <date>2018-03-30</date>
+        <tagged>priority</tagged>
+    </persons>
     <tags>friend</tags>
     <tags>enemy</tags>
     <tags>fragile</tags>

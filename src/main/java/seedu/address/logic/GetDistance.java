@@ -38,6 +38,9 @@ public class GetDistance {
      * get driving distance from origin to destination
      */
     public double getDistance(String origin, String destination) {
+        if (origin.equals(destination)) {
+            return 0;
+        }
         String distanceWithoutUnit = "";
         DistanceMatrix matrix = null;
         matrix = getMatrix(origin, destination);

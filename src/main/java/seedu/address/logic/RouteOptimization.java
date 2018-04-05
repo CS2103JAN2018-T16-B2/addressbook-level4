@@ -121,12 +121,14 @@ public class RouteOptimization {
             paths.put(labelRoutes(origin, destination), distance.getDistance(origin, destination));
         }
         dummy = sort.cleanSorted(sort.sortByComparator(paths));
-        Map.Entry<String, Double> entry = dummy.entrySet().iterator().next();
-        next = entry.getKey().split("_")[1];
-        optimizedRoute.add(next);
-        filteredAddresses = removeAddress(next, filteredAddresses);
-        if (filteredAddresses.size() != 0) {
-            optimizedRoute = getDistances(filteredAddresses, next, optimizedRoute);
+        if( dummy.entrySet().iterator().hasNext()) {
+            Map.Entry<String, Double> entry = dummy.entrySet().iterator().next();
+            next = entry.getKey().split("_")[1];
+            optimizedRoute.add(next);
+            filteredAddresses = removeAddress(next, filteredAddresses);
+            if (filteredAddresses.size() != 0) {
+                optimizedRoute = getDistances(filteredAddresses, next, optimizedRoute);
+            }
         }
         return optimizedRoute;
     }
