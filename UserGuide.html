@@ -83,15 +83,20 @@ This app will not work with earlier versions of Java 8.
 </tr>
 </table>
 </div>
-<div class="paragraph">
-<p>.</p>
+</li>
+<li>
+<p>Run the MainApp scripts / jar file and await for the GUI to open</p>
+</li>
+<li>
+<p>A login screen such as the one below should appear.</p>
+<div class="imageblock">
+<div class="content">
+<img src="images/LoginScreen.png" alt="LoginScreen" width="300">
+</div>
 </div>
 </li>
 <li>
-<p>Run the MainApp scripts and await for the GUI to open</p>
-</li>
-<li>
-<p>A login screen should appear. Create a profile with desired username and password if using for the first time.
+<p>Create a profile with desired username and password if using for the first time.
 If profile has previously already been created, or after creation of profile, click login.</p>
 <div class="admonitionblock note">
 <table>
@@ -140,6 +145,9 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 </li>
 <li>
 <p>Refer to <a href="#Features">Section 3, &#8220;Features&#8221;</a> for details of each command.</p>
+</li>
+<li>
+<p>Refer to <a href="#user-testing">Section 5, &#8220;User Testing&#8221;</a> for a quick list of the sequence of commands you can try in this app.</p>
 </li>
 </ol>
 </div>
@@ -323,6 +331,17 @@ Returns any person having names <code>Betsy</code>, <code>Tim</code>, or <code>J
 <div class="paragraph">
 <p>Filers the list of people by date (only one date)
 Format: <code>filter DATE</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Date format should be YYYY-MM-DD</p>
+</li>
+</ul>
+</div>
+</div>
 </div>
 <div class="paragraph">
 <p>When you filter by date the back end of the program will create an optimized route
@@ -578,7 +597,7 @@ Return the distance from the headquarter to the 1st person name Betsy in the add
 <div class="sect2">
 <h3 id="setting-the-headquarters-code-coming-in-v2-0-code"><a class="link" href="#setting-the-headquarters-code-coming-in-v2-0-code">3.14. Setting the HeadQuarters <code>[coming in v2.0]</code></a></h3>
 <div class="paragraph">
-<p>User is able to set the address of the headquarters with 'sethq' command</p>
+<p>User is able to set the address of the headquarters with <code>sethq</code> command</p>
 </div>
 </div>
 <div class="sect2">
@@ -659,16 +678,66 @@ You will not see data from that of another user profile.</p>
 Feel free to try other commands outlined above when you get the feel of our program as well.</p>
 </div>
 <div class="paragraph">
-<p><strong>1.</strong>  add n/John Doe a/321 Clementi Ave p/67340028 e/pigeonscs2103@gmail.com d/2018-03-24</p>
+<p><strong>1.</strong> add n/John Doa a/321 Clementi Ave p/67340028 e/pigeonscs2103@gmail.com d/2018-03-24</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>John Doa should be added to the list of addressees.</p>
+</li>
+</ul>
+</div>
+</div>
 </div>
 <div class="paragraph">
-<p><strong>2.</strong> list John</p>
+<p><strong>2.</strong> filter 2018-03-24</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>All addressees with 2018-03-24 in their delivery date should be listed.</p>
+</li>
+<li>
+<p>Additionally, a map routing all the shown addressees should be generated.</p>
+</li>
+</ul>
+</div>
+</div>
 </div>
 <div class="paragraph">
-<p><strong>3.</strong> filter 2018-03-30</p>
+<p><strong>3.</strong> find John</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>All addressees with John in their name should be listed.</p>
+</li>
+</ul>
+</div>
+</div>
 </div>
 <div class="paragraph">
-<p><strong>4.</strong> delete John</p>
+<p><strong>4.</strong> delete 1</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>John, which we added at the start, should be removed.</p>
+</li>
+<li>
+<p>1-index numbering system (i.e. the first addressee has index 1)</p>
+</li>
+</ul>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -744,7 +813,7 @@ e.g.<code>distance 2</code></p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-05 08:02:47 UTC
+Last updated 2018-04-05 11:25:12 UTC
 </div>
 </div>
 </body>
