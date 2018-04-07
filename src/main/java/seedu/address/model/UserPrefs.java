@@ -10,8 +10,10 @@ import seedu.address.commons.core.GuiSettings;
 public class UserPrefs {
 
     private GuiSettings guiSettings;
-    private String addressBookFilePath = "data/addressbook.xml";
-    private String addressBookName = "MyAddressBook";
+    private String addressBookFolderPath = "data/";
+    private String addressBookFileName = "username";
+    private String addressBookFilePath = addressBookFolderPath + addressBookFileName + "addressbook.xml";
+    private String addressBookName = "Address Book";
 
     public UserPrefs() {
         this.setGuiSettings(1200, 800, 0, 0);
@@ -29,12 +31,13 @@ public class UserPrefs {
         guiSettings = new GuiSettings(width, height, x, y);
     }
 
-    public String getAddressBookFilePath() {
-        return addressBookFilePath;
+    public String getAddressBookFolderPath() {
+        return addressBookFolderPath;
     }
 
-    public void setAddressBookFilePath(String addressBookFilePath) {
-        this.addressBookFilePath = addressBookFilePath;
+    public void setAddressBookFolderPath(String addressBookFolderPath) {
+        this.addressBookFolderPath = addressBookFolderPath;
+        addressBookFilePath = addressBookFolderPath + addressBookFileName + "addressbook.xml";
     }
 
     public String getAddressBookName() {
@@ -43,6 +46,23 @@ public class UserPrefs {
 
     public void setAddressBookName(String addressBookName) {
         this.addressBookName = addressBookName;
+    }
+
+    public String getAddressBookFilePath() {
+        return addressBookFilePath;
+    }
+
+    public void setAddressBookFilePath(String addressBookFilePath) {
+        this.addressBookFilePath = addressBookFilePath;
+    }
+
+    public String getAddressBookFileName() {
+        return addressBookFileName;
+    }
+
+    public void setAddressBookFileName(String addressBookFileName) {
+        this.addressBookFileName = addressBookFileName;
+        addressBookFilePath = addressBookFolderPath + addressBookFileName + "addressbook.xml";
     }
 
     @Override
@@ -70,7 +90,7 @@ public class UserPrefs {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Gui Settings : " + guiSettings.toString());
-        sb.append("\nLocal data file location : " + addressBookFilePath);
+        sb.append("\nLocal data file location : " + addressBookFolderPath + addressBookName + addressBookFilePath);
         sb.append("\nAddressBook name : " + addressBookName);
         return sb.toString();
     }
