@@ -16,6 +16,7 @@ import javafx.scene.web.WebView;
 
 import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.ui.GameEvent;
 import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
 import seedu.address.commons.events.ui.ShowDefaultPageEvent;
 import seedu.address.commons.events.ui.ShowMultiLocationFromHeadQuarterEvent;
@@ -167,5 +168,13 @@ public class BrowserPanel extends UiPart<Region> {
         additionalInfo.setText("Estimated Required Time for Deliveries: "
                 + FilterCommand.getDuration(event.sortedList));
         loadPage(url.toString());
+    }
+
+    @Subscribe
+    public void handleGameEvent(GameEvent event) {
+
+        URL gamePath = MainApp.class.getResource("/games/Snake.html");
+        loadPage(gamePath.toExternalForm());
+        additionalInfo.setText("+ Additional information will be displayed here.");
     }
 }

@@ -193,11 +193,32 @@ public class DistanceCommand extends Command {
         //all addresses can be found
         return new CommandResult(getMessageForPersonListShownSummary(numberOfPersonsListed));
 ```
+###### \java\seedu\address\logic\commands\GameCommand.java
+``` java
+/**
+ * Show game on to the display panel
+ */
+public class GameCommand extends Command {
+
+    public static final String COMMAND_WORD = "game";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Play \"The snake\" game.\n"
+            + "Example: " + COMMAND_WORD;
+
+    public static final String SHOWING_GAME_MESSAGE = "Opened \"The snake\" game.";
+
+    @Override
+    public CommandResult execute() {
+        EventsCenter.getInstance().post(new GameEvent());
+        return new CommandResult(SHOWING_GAME_MESSAGE);
+    }
+}
+```
 ###### \java\seedu\address\logic\GetDistance.java
 ``` java
     public DistanceMatrix getMatrix(String origin, String destination) {
         GeoApiContext context = new GeoApiContext.Builder()
-                .apiKey("AIzaSyBWyCJkCym1dSouzHX_FxLk6Tj11C7F0Ao")
+                .apiKey("AIzaSyDga8lhEq6jOcAm03b4GGWR65GhWOrbOxg")
                 .build();
 
         String[] origins = {origin};
@@ -289,9 +310,14 @@ public class DistanceCommandParser implements Parser<DistanceCommand> {
     private void readWelcomeMessage() {
         try {
             Runtime.getRuntime().exec("wscript src\\main\\resources\\scripts\\Welcome.vbs");
-            //Runtime.getRuntime().exec("osascript src\\main\\resources\\scripts\\");
         } catch (IOException e) {
-            System.out.println("Unable to load welcome message.");
+            try {
+                String[] args = {"osascript ",
+                        "say \"Welcome user\" using \"Alex\" speaking rate 140 pitch 42 modulation 60"};
+                Runtime.getRuntime().exec(args);
+            } catch (IOException e1) {
+                logger.warning("Unable to load welcome message.");
+            }
         }
     }
 ```
@@ -324,10 +350,13 @@ public class DistanceCommandParser implements Parser<DistanceCommand> {
         try {
             Runtime.getRuntime().exec("wscript src\\main\\resources\\scripts\\ClickOnNameCard.vbs"
                     + " " + person.getName().fullName);
-            //Runtime.getRuntime().exec("osascript src\\main\\resources\\scripts\\ClickOnNameCard.vbs"
-            //                    + " " + person.getName().fullName);
         } catch (IOException e) {
-            System.out.println("Unable to read person name");
+            try {
+                Runtime.getRuntime().exec("osascript src\\main\\resources\\scripts\\ClickOnNameCardMac.scpt"
+                        + " " + person.getName().fullName);
+            } catch (IOException e1) {
+                logger.warning("Unable to load welcome message.");
+            }
         }
     }
 ```
@@ -366,6 +395,14 @@ public class DistanceCommandParser implements Parser<DistanceCommand> {
         additionalInfo.setText("Estimated Required Time for Deliveries: "
                 + FilterCommand.getDuration(event.sortedList));
         loadPage(url.toString());
+    }
+
+    @Subscribe
+    public void handleGameEvent(GameEvent event) {
+
+        URL gamePath = MainApp.class.getResource("/games/Snake.html");
+        loadPage(gamePath.toExternalForm());
+        additionalInfo.setText("+ Additional information will be displayed here.");
     }
 }
 ```
