@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 1.5.6.1">
+<title>Meera Kanani - Project Portfolio</title>
+<link rel="stylesheet" href="../stylesheets/gh-pages.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+<link rel="stylesheet" href="../stylesheets/coderay-asciidoctor.css">
+</head>
+<body class="article">
+<div id="header">
+<h1>Meera Kanani - Project Portfolio</h1>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="project-pigeons"><a class="link" href="#project-pigeons">PROJECT: Pigeons</a></h2>
+<div class="sectionbody">
+<hr>
+</div>
+</div>
+<div class="sect1">
+<h2 id="overview"><a class="link" href="#overview">Overview</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Pigeons is a desktop level application created for delivery companies to better assign and
+organize deliveries for the delivery people.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="summary-of-contributions"><a class="link" href="#summary-of-contributions">Summary of contributions</a></h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Major enhancement</strong>: added <strong>the ability to create an optimal delivery route when filtering the data
+by delivery date</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>What it does: allows the user to filter all the data by date of delivery and then creates an optimized route from the headquarters to all the delivery points for that day.</p>
+</li>
+<li>
+<p>Justification: This feature improves the product significantly because the user is meant to be someone who delivers packages and this make it easy for the user to determine where he has to go that day and what the best route is from his
+starting location. This optimized route will be outputed as a map on the UI by another team member.</p>
+</li>
+<li>
+<p>Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands but more importantly required creating new classes and methods that
+could be referenced by other team members and would be usable for the UI.</p>
+</li>
+<li>
+<p>Credits: The Google API was used to get the distance between addresses, the java code was written around using this API.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Minor enhancement</strong>: added a filter command that allows the user to filter the data by date (delivery date).</p>
+</li>
+<li>
+<p><strong>Minor enhancement</strong>: added a getTime function that gets the time of the entire journey for the delivery man and can be displayed on the UI.</p>
+</li>
+</ul>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Code contributed</strong>: [<a href="https://github.com">Functional code</a>] [<a href="https://github.com">Test code</a>] <em>{give links to collated code files}</em></p>
+</li>
+<li>
+<p><strong>Other contributions</strong>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Project management:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Kept team on track on TODO&#8217;s before each tutorial</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Enhancements to existing features:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Wrote additional tests for existing features to increase coverage</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Documentation:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Did cosmetic tweaks to existing contents of the User Guide: <a href="https://github.com">#14</a></p>
+</li>
+<li>
+<p>Modified existing guides to include the premises of our project</p>
+</li>
+<li>
+<p>Removed items of the user guide, developer guide etc that were relevant for our project]</p>
+</li>
+<li>
+<p>Added documentation for all the features I added in the dev guide and user guide.</p>
+</li>
+<li>
+<p>Modifed the README doc</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Community:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>PRs reviewed (with non-trivial review comments)</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="contributions-to-the-user-guide"><a class="link" href="#contributions-to-the-user-guide">Contributions to the User Guide</a></h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users.</em></p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect2">
+<h3 id="filtering-person-by-date-code-filter-code"><a class="link" href="#filtering-person-by-date-code-filter-code">Filtering person by date: <code>filter</code></a></h3>
+<div class="paragraph">
+<p>Filers the list of people by date (only one date)
+Format: <code>filter DATE</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Recommended date format is YYYY-MM-DD</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>When you filter by date the back end of the program will create an optimized route
+for all the people on that date and display the route on the map.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>The search can only look for one date</p>
+</li>
+<li>
+<p>Persons with the delivery date matching the argument will be returned</p>
+</li>
+<li>
+<p>This filter can be used to obtain a delivery route for a day</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="user-testing"><a class="link" href="#user-testing">User Testing</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When testing and using our system for the first time, here are some commands you can try to get the full experience.
+Feel free to try other commands outlined above when you get the feel of our program as well.</p>
+</div>
+<div class="paragraph">
+<p><strong>1.</strong> add n/John Doa a/321 Clementi Ave p/67340028 e/pigeonscs2103@gmail.com d/2018-03-24</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>John Doa should be added to the list of addressees.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>2.</strong> filter 2018-03-24</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>All addressees with 2018-03-24 in their delivery date should be listed.</p>
+</li>
+<li>
+<p>Additionally, a map routing all the shown addressees should be generated.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>3.</strong> find John</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>All addressees with John in their name should be listed.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>4.</strong> delete 1</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>John, which we added at the start, should be removed.</p>
+</li>
+<li>
+<p>1-index numbering system (i.e. the first addressee has index 1)</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="contributions-to-the-developer-guide"><a class="link" href="#contributions-to-the-developer-guide">Contributions to the Developer Guide</a></h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project.</em></p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect2">
+<h3 id="filter-command"><a class="link" href="#filter-command">Filter Command</a></h3>
+<div class="paragraph">
+<p>To add to the many commands necessary for users, filtering by date will be essential when trying to optimize the route per day.
+The filter command was added similar to how the find command has been implemented.
+When the user enters filter by a date in the UI the model with the list of data is updated using the date predicate.
+This updated model is then executed via the CommandResult class and output on the UI. It is stores as a readonly list in the model.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="route-optimization-feature"><a class="link" href="#route-optimization-feature">Route Optimization feature</a></h3>
+<div class="paragraph">
+<p>Since this program is meant for deliveries the route for the daily delivery must be optimized for the user.
+The RouteOptimization class will get the distance (getDistance function in GetDistance class) between all the addresses for the day.</p>
+</div>
+<div class="paragraph">
+<p>The addresses will then be sorted based on optimal sortest route.
+Example:
+3 deliveries for a day at Point A, B, C</p>
+</div>
+<div class="paragraph">
+<p>Point A -&#8594; Point B = 14km (12min)
+Point A -&#8594; Point C = 13km (13min)
+Point C -&#8594; Point B = 12km (10min)</p>
+</div>
+<div class="paragraph">
+<p>Optimal Route = Point A -&#8594; Point C -&#8594; Point B (based on least about of km travelled)</p>
+</div>
+<div class="paragraph">
+<p>In the RouteOptimization class the sorting function will be responsible to determine the optimal route once the distances are obtained</p>
+</div>
+<div class="paragraph">
+<p>To getDistance - google API is required to get the geocodes for the locations. Once the geocode for each address is obtained
+the distance between the two points is calculated and a matrix is returned with a distance property.
+The distance property gives the distance in kilometers from the origin to destination.</p>
+</div>
+<div class="paragraph">
+<p>The optimized route will the be fed into a mapping function to display the route and get the directions for the driver.</p>
+</div>
+<div class="sect3">
+<h4 id="sorting-addresses"><a class="link" href="#sorting-addresses">Sorting addresses</a></h4>
+<div class="paragraph">
+<p>Once the distances have been found for all combinations of addresses on that filtered day they get stored in a Map with key: "address1_address2" and
+value: Double distance (in km). This hashmap gets sorted in order of distances and any irrelevant or duplicate calculations are removed.
+This sorted Hashmap now contains the key with the orign and destination address as well as the distance between the two.</p>
+</div>
+<div class="paragraph">
+<p>Coming soon - If the first key is A_B then the second key must be B_X where X is the address closest to B (not including A). Based on this logic a list of addresses
+will be created as the optimum delivery route.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2018-04-09 06:32:07 UTC
+</div>
+</div>
+</body>
+</html>
