@@ -245,15 +245,12 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-// tag::filter[]
 === Filter Command
 To add to the many commands necessary for users, filtering by date will be essential when trying to optimize the route per day.
 The filter command was added similar to how the find command has been implemented.
 When the user enters filter by a date in the UI the model with the list of data is updated using the date predicate.
 This updated model is then executed via the CommandResult class and output on the UI. It is stores as a readonly list in the model.
-// end::filter[]
 
-// tag::optimize[]
 === Route Optimization feature
 Since this program is meant for deliveries the route for the daily delivery must be optimized for the user.
 The RouteOptimization class will get the distance (getDistance function in GetDistance class) between all the addresses for the day.
@@ -275,9 +272,7 @@ the distance between the two points is calculated and a matrix is returned with 
 The distance property gives the distance in kilometers from the origin to destination.
 
 The optimized route will the be fed into a mapping function to display the route and get the directions for the driver.
-// end::optimize[]
 
-// tag::sort[]
 ==== Sorting addresses
 Once the distances have been found for all combinations of addresses on that filtered day they get stored in a Map with key: "address1_address2" and
 value: Double distance (in km). This hashmap gets sorted in order of distances and any irrelevant or duplicate calculations are removed.
@@ -285,7 +280,6 @@ This sorted Hashmap now contains the key with the orign and destination address 
 
 Coming soon - If the first key is A_B then the second key must be B_X where X is the address closest to B (not including A). Based on this logic a list of addresses
 will be created as the optimum delivery route.
-// end::sort[]
 
 // tag::login[]
 === Login feature

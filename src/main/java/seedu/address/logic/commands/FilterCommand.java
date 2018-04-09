@@ -34,7 +34,6 @@ public class FilterCommand extends Command {
     @Override
     public CommandResult execute() throws CommandException, IOException {
 
-        //@@author meerakanani10
         RouteOptimization route = new RouteOptimization();
         List<String> optimizedRoute;
 
@@ -73,9 +72,9 @@ public class FilterCommand extends Command {
 
         //all addresses can be found
         return new CommandResult(getMessageForPersonListShownSummary(numberOfPersonsListed));
+        //@@author meerakanani10
     }
 
-    //@@author meerakanani10
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

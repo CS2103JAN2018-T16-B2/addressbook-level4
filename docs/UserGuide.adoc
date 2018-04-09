@@ -26,10 +26,6 @@ The recommended way to use Pigeons is to first load in the delivery data by a ce
 and then allow each driver to login to their own account and filter by today's date to retrieve the route for the deliveries
 they have for the day.
 
-* Users will be able to add individuals to the address book and route out deliveries based on the day
-* The program will return attributes that will make the delivery mans life easier such as distance to destination and best time to leave
-
-
 Jump to the <<Quick Start>> to get started. Enjoy!
 
 == Quick Start
@@ -144,7 +140,6 @@ Returns `john` and `John Doe`
 * `find Betsy Tim John` +
 Returns any person having names `Betsy`, `Tim`, or `John`
 
-// tag::filter[]
 === Filtering person by date: `filter`
 
 Filers the list of people by date (only one date)
@@ -162,7 +157,6 @@ for all the people on that date and display the route on the map.
 * This filter can be used to obtain a delivery route for a day
 ****
 
-// end::filter[]
 
 === Deleting a person : `delete`
 
@@ -335,7 +329,6 @@ Users may be able to load in large amounts of addressees into their Pigeons addr
 *Q*: How do I transfer my data to another Computer? +
 *A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.
 
-// tag::testing[]
 == User Testing
 
 When testing and using our system for the first time, here are some commands you can try to get the full experience.
@@ -362,8 +355,6 @@ Feel free to try other commands outlined above when you get the feel of our prog
 * John, which we added at the start, should be removed.
 * 1-index numbering system (i.e. the first addressee has index 1)
 ****
-// end::testing[]
-
 
 == Command Summary
 

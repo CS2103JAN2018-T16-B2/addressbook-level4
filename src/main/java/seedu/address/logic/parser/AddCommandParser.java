@@ -66,8 +66,6 @@ public class AddCommandParser implements Parser<AddCommand> {
             return new AddCommand(person);
         } catch (IllegalValueException ive) {
             throw new ParseException(ive.getMessage(), ive);
-        } catch (IllegalArgumentException e) {
-            throw new ParseException(e.getMessage(), e);
         }
     }
 

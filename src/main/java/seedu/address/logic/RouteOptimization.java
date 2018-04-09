@@ -17,7 +17,6 @@ import seedu.address.model.person.Person;
 public class RouteOptimization {
     public static final String HQ_ADDRESS = "Kent Ridge MRT";
 
-    //@@author meerakanani10
     /**
      *
      * @param model
@@ -38,6 +37,7 @@ public class RouteOptimization {
                 optimizedRoute.add(addressWithoutUnit);
             }
         } else {
+            //need to figure out what the key should be to make sure we know what the hashmap is storing
             for (int i = 0; i < lastShownList.size(); i++) {
                 Address address = lastShownList.get(i).getAddress();
                 if (isFindableAddress(address)) {
@@ -112,14 +112,6 @@ public class RouteOptimization {
     }
 
     //@@author meerakanani10
-
-    /**
-     * Recursive function to get the distance between addresses
-     * @param filteredAddresses - list of addresses
-     * @param origin - starting point
-     * @param optimizedRoute - optimized route that recursively get modified until completely optimized
-     * @return
-     */
     public List<String> getDistances(List<String> filteredAddresses, String origin, List<String> optimizedRoute) {
         Map<String, Double> paths = new LinkedHashMap<>();
         Map<String, Double> dummy = new HashMap<>();

@@ -60,7 +60,6 @@ public class AddCommand extends UndoableCommand {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-
     }
 
     @Override
