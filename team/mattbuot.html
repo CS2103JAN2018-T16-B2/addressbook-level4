@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 1.5.6.1">
+<title>Matthieu Buot de l&#8217;Epine - Project Portfolio</title>
+<link rel="stylesheet" href="../stylesheets/gh-pages.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+<link rel="stylesheet" href="../stylesheets/coderay-asciidoctor.css">
+</head>
+<body class="article">
+<div id="header">
+<h1>Matthieu Buot de l&#8217;Epine - Project Portfolio</h1>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="project-pigeons"><a class="link" href="#project-pigeons">PROJECT: Pigeons</a></h2>
+<div class="sectionbody">
+<hr>
+</div>
+</div>
+<div class="sect1">
+<h2 id="overview"><a class="link" href="#overview">Overview</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Pigeons is a desktop level application created for delivery companies to better assign and
+organize deliveries for the delivery people.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="summary-of-contributions"><a class="link" href="#summary-of-contributions">Summary of contributions</a></h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Major enhancement</strong>: added <strong>the ability to send automatic emails to customers and drivers.</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>What it does: allow the user to send an automatic recap email to the driver with all the deliveries scheduled on a specific day. And at the same time a reminder email to each customers which indicates the day on which their delivery is coming.</p>
+</li>
+<li>
+<p>Justification: This feature improves the product significantly because a user can communicate with both the drivers and the customers in an effective manner.</p>
+</li>
+<li>
+<p>Highlights: This enhancement is very dependent on the other commands and features as the <code>filter</code> command has to be ran before the <code>email</code> and as it is supposed to send an itinerary which is computed by another component. It required an in-depth analysis of the communication ways between drivers and customers and a good understanding of the whole application purpose.</p>
+</li>
+<li>
+<p>Credits: The JavaMail API (optional package from the Java SE platform) is used to send the emails through a Gmail account,</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Minor enhancement</strong>: added an autocompletion functionality which is able to complete many possible inputs in the CLI interface by pressing the <kbd>tab</kbd> key</p>
+</li>
+<li>
+<p><strong>Code contributed</strong>: [<a href="https://github.com/CS2103JAN2018-T16-B2/main/blob/master/collated/functional/mattbuot.md">Functional code</a>] [<a href="https://github.com/CS2103JAN2018-T16-B2/main/blob/master/collated/test/mattbuot.md">Test code</a>]</p>
+</li>
+<li>
+<p><strong>Other contributions</strong>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Project management:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Managed releases <code>v1.2</code> - <code>v1.4.1</code> (4 releases) on GitHub</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Documentation:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Did cosmetic tweaks to existing contents of the User Guide: <a href="https://github.com/CS2103JAN2018-T16-B2/main/pull/3">#3</a>, <a href="https://github.com/CS2103JAN2018-T16-B2/main/pull/8">#8</a>, <a href="https://github.com/CS2103JAN2018-T16-B2/main/pull/106">#106</a>, <a href="https://github.com/CS2103JAN2018-T16-B2/main/pull/120">#120</a></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Community:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Contributed to forum discussions (<a href="https://github.com/nus-cs2103-AY1718S2/forum/issues/25#issuecomment-374913188">1</a>)</p>
+</li>
+<li>
+<p>Reported bugs and suggestions for other teams in the class (examples:  <a href="https://github.com/CS2103JAN2018-T15-B3/main/issues/88">1</a>)</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="contributions-to-the-user-guide"><a class="link" href="#contributions-to-the-user-guide">Contributions to the User Guide</a></h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users.</em></p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect2">
+<h3 id="emailing-the-customers-code-email-code"><a class="link" href="#emailing-the-customers-code-email-code">Emailing the customers : <code>email</code></a></h3>
+<div class="paragraph">
+<p>Sends an email to the filtered list of customers to remind them when their delivery is coming
+and the itinerary to the driver with the list of all the addresses
+ordered so that it corresponds to the shortest journey.<br>
+Format: <code>email</code></p>
+</div>
+<div class="paragraph">
+<p>This command will email every user listed on the UI screen when the email command is run.<br></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Remind to first filter the customers by date.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="shortcuts"><a class="link" href="#shortcuts">Shortcuts</a></h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><kbd>tab</kbd> : autocomplete a command or a field</p>
+</li>
+<li>
+<p><kbd>&uarr;</kbd> : previous input</p>
+</li>
+<li>
+<p><kbd>&darr;</kbd> : next input</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="contributions-to-the-developer-guide"><a class="link" href="#contributions-to-the-developer-guide">Contributions to the Developer Guide</a></h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project.</em></p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect2">
+<h3 id="mailer-feature"><a class="link" href="#mailer-feature">Mailer feature</a></h3>
+<div class="paragraph">
+<p>We use an abstract <code>Mailer</code> class which provide a method that sends an email to a list of <code>Person</code>
+and another which sends an itinerary to the driver.<br>
+This class uses the JavaMail API to send emails from the address : <a href="mailto:pigeonscs2103@gmail.com">pigeonscs2103@gmail.com</a>.<br>
+We also created a new <code>EmailCommand</code> which directly uses the <code>Mailer</code> class in its redefinition of <code>super.execute()</code>.
+The information related to the itinerary are collected by the <code>EmailCommand</code> which creates an instance of <code>RouteOptimization</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="autocompletion-feature"><a class="link" href="#autocompletion-feature">Autocompletion feature</a></h3>
+<div class="paragraph">
+<p>We use an <code>Autocompleter</code> class which stores the list of <code>Command</code> and all the different fields (<code>Name</code>, <code>Address</code>, etc) created in the <code>LogicManager</code>.
+The <code>Autocompleter</code> can complete:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>a command word, if it&#8217;s the first of a query</p>
+</li>
+<li>
+<p>an option, starting by "n/" for example</p>
+</li>
+<li>
+<p>a name, if the current query doesn&#8217;t match the first two cases: if we only have "John Doe" in the <code>AddressBook</code> we can complete the query by either "John" or "Doe" (this is useful to complete the <code>FindCommand</code>).</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>After having chosen between one this three cases, we generate a set of all possible suffixes that can be append to the current query. And from this set, we extract the longest common prefix which is the returned <code>String</code> of <code>Autocompleter.autocomplete()</code>.<br>
+For example : if we want to complete the query <code>find J</code> and we have two persons in the address book called <code>John</code> and <code>Jonathan</code>, the set of possible suffixes will be {<code>ohn</code>, <code>onathan</code>} and the longest common prefix is <code>o</code>.
+So the completed query will be <code>find Jo</code>.</p>
+</div>
+<div class="paragraph">
+<p>This class is used in <code>CommandBox</code> which sends the content of the command line and then append the result of the autocomplete operation.</p>
+</div>
+<h3 id="use-case-deliver-a-package-to-a-specific-customer" class="discrete">Use case: Deliver a package to a specific customer</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User enters the package reference</p>
+</li>
+<li>
+<p>Address book outputs the customer&#8217;s information (availabilities, address)</p>
+</li>
+<li>
+<p>User clicks on the customer’s address</p>
+</li>
+<li>
+<p>Address book open the itinerary to the customer’s address on Google Maps</p>
+</li>
+<li>
+<p>User can drive to the customer’s location</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>2a. The given package reference is invalid.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a1. AddressBook shows an error message.</p>
+<div class="paragraph">
+<p>Use case resumes at step 1.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="use-case-mapping-the-route-for-the-day" class="discrete">Use case: Mapping the route for the day</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to list the database ordered by date of delivery</p>
+</li>
+<li>
+<p>Address book outputs the list of deliveries</p>
+</li>
+<li>
+<p>User selects all the addresses and runs the “map” command on the selected addresses</p>
+</li>
+<li>
+<p>Address book displays a mapped out route for the day with an ideal time to begin the route</p>
+</li>
+<li>
+<p>User can start the delivery</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2018-04-11 15:23:08 UTC
+</div>
+</div>
+</body>
+</html>
