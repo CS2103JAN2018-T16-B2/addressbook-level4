@@ -18,7 +18,7 @@ import org.junit.Test;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.events.ui.JumpToListRequestEvent;
+import seedu.address.commons.events.ui.ShowRouteFromHeadQuarterToOneEvent;
 import seedu.address.commons.events.ui.ShowRouteFromOneToAnotherEvent;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.GetDistance;
@@ -89,24 +89,24 @@ public class DistanceCommandTest {
 
     @Test
     public void equals() {
-        SelectCommand selectFirstCommand = new SelectCommand(INDEX_FIRST_PERSON);
-        SelectCommand selectSecondCommand = new SelectCommand(INDEX_SECOND_PERSON);
+        DistanceCommand distanceFirstCommand = new DistanceCommand(INDEX_FIRST_PERSON);
+        DistanceCommand distanceSecondCommand = new DistanceCommand(INDEX_SECOND_PERSON);
 
         // same object -> returns true
-        assertTrue(selectFirstCommand.equals(selectFirstCommand));
+        assertTrue(distanceFirstCommand.equals(distanceFirstCommand));
 
         // same values -> returns true
-        SelectCommand selectFirstCommandCopy = new SelectCommand(INDEX_FIRST_PERSON);
-        assertTrue(selectFirstCommand.equals(selectFirstCommandCopy));
+        DistanceCommand distanceFirstCommandCopy = new DistanceCommand(INDEX_FIRST_PERSON);
+        assertTrue(distanceFirstCommand.equals(distanceFirstCommandCopy));
 
         // different types -> returns false
-        assertFalse(selectFirstCommand.equals(1));
+        assertFalse(distanceFirstCommand.equals(1));
 
         // null -> returns false
-        assertFalse(selectFirstCommand.equals(null));
+        assertFalse(distanceFirstCommand.equals(null));
 
         // different person -> returns false
-        assertFalse(selectFirstCommand.equals(selectSecondCommand));
+        assertFalse(distanceFirstCommand.equals(distanceSecondCommand));
     }
 
     /**
@@ -118,14 +118,22 @@ public class DistanceCommandTest {
         try {
             CommandResult commandResult = distanceCommand.execute();
             String address = person.getAddress().toString();
+            //Trim address
+            if (address.indexOf('#') > 2) {
+                int stringCutIndex;
+                stringCutIndex = address.indexOf('#') - 2;
+                address = address.substring(0, stringCutIndex);
+            }
+
+            String personName = person.getName().toString();
             String headQuarterAddress = "Kent Ridge MRT";
             GetDistance route = new GetDistance();
             Double distance = route.getDistance(headQuarterAddress, address);
 
-            JumpToListRequestEvent lastEvent =
-                    (JumpToListRequestEvent) eventsCollectorRule.eventsCollector.getMostRecent();
-            assertEquals(index, Index.fromZeroBased(lastEvent.targetIndex));
-            assertEquals(String.format(DistanceCommand.MESSAGE_DISTANCE_FROM_HQ_SUCCESS, distance),
+            ShowRouteFromHeadQuarterToOneEvent lastEvent =
+                    (ShowRouteFromHeadQuarterToOneEvent) eventsCollectorRule.eventsCollector.getMostRecent();
+            assertEquals(address, lastEvent.destination);
+            assertEquals(String.format(DistanceCommand.MESSAGE_DISTANCE_FROM_HQ_SUCCESS, personName, distance),
                     commandResult.feedbackToUser);
         } catch (Exception ce) {
             System.out.println(ce.getMessage());
@@ -144,6 +152,20 @@ public class DistanceCommandTest {
             CommandResult commandResult = distanceCommand.execute();
             String addressOrigin = personAtOrigin.getAddress().toString();
             String addressDestination = personAtDestination.getAddress().toString();
+
+            //Trim addresses
+            if (addressOrigin.indexOf('#') > 2) {
+                int stringCutIndex;
+                stringCutIndex = addressOrigin.indexOf('#') - 2;
+                addressOrigin = addressOrigin.substring(0, stringCutIndex);
+            }
+
+            if (addressDestination.indexOf('#') > 2) {
+                int stringCutIndex;
+                stringCutIndex = addressDestination.indexOf('#') - 2;
+                addressDestination = addressDestination.substring(0, stringCutIndex);
+            }
+
             String nameOrigin = personAtOrigin.getName().fullName;
             String nameDestination = personAtDestination.getName().fullName;
             GetDistance route = new GetDistance();

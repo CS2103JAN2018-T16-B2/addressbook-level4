@@ -1,6 +1,10 @@
 package seedu.address.ui;
 
+import static seedu.address.logic.commands.SelectCommand.MESSAGE_SELECT_PERSON_SUCCESS;
+
+import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URL;
 import java.util.List;
 import java.util.logging.Logger;
@@ -15,10 +19,14 @@ import javafx.scene.text.Text;
 import javafx.scene.web.WebView;
 
 import seedu.address.MainApp;
+import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.ui.GameEvent;
+import seedu.address.commons.events.ui.NewResultAvailableEvent;
 import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
 import seedu.address.commons.events.ui.ShowDefaultPageEvent;
 import seedu.address.commons.events.ui.ShowMultiLocationFromHeadQuarterEvent;
+import seedu.address.commons.events.ui.ShowRouteFromHeadQuarterToOneEvent;
 import seedu.address.commons.events.ui.ShowRouteFromOneToAnotherEvent;
 import seedu.address.logic.GetDistance;
 
@@ -81,15 +89,43 @@ public class BrowserPanel extends UiPart<Region> {
      */
     private void readPersonName(Person person) {
         try {
-            Runtime.getRuntime().exec("wscript src\\main\\resources\\scripts\\ClickOnNameCard.vbs"
-                    + " " + person.getName().fullName);
+            createFolderIfNeeded();
+            createScriptIfNeeded();
+            readPersonNameScript(person);
         } catch (IOException e) {
-            try {
-                Runtime.getRuntime().exec("osascript src\\main\\resources\\scripts\\ClickOnNameCardMac.scpt"
-                        + " " + person.getName().fullName);
-            } catch (IOException e1) {
-                logger.warning("Unable to load welcome message.");
-            }
+            logger.warning("Unable to read Introduce person script");
+        }
+    }
+
+    private void readPersonNameScript(Person person) throws IOException {
+        logger.info("Running welcome script");
+        Runtime.getRuntime().exec("wscript.exe script\\ReadPersonName.vbs"
+                + " " + person.getName().fullName);
+    }
+
+    private void createScriptIfNeeded() throws IOException {
+        File f = new File("script\\ReadPersonName.vbs");
+        if (!f.exists()) {
+            File file1 = new File("script\\ReadPersonName.txt");
+            logger.info("Creating script ReadPersonName.txt");
+            file1.createNewFile();
+            logger.info("Writing to ReadPersonName.txt");
+            PrintWriter writer = new PrintWriter("script\\ReadPersonName.txt", "UTF-8");
+            writer.println("name = WScript.Arguments(0)");
+            writer.println("speaks=\"This is \" + name");
+            writer.println("CreateObject(\"sapi.spvoice\").Speak speaks");
+            writer.close();
+            logger.info("Converting ReadPersonName.txt to ReadPersonName.vbs");
+            File file2 = new File("script\\ReadPersonName.vbs");
+            file1.renameTo(file2);
+        }
+    }
+
+    private void createFolderIfNeeded() {
+        File dir = new File("script");
+        if (!dir.exists()) {
+            logger.info("Creating script directory");
+            boolean successful = dir.mkdirs();
         }
     }
     //@@author
@@ -99,6 +135,7 @@ public class BrowserPanel extends UiPart<Region> {
      */
     public void loadPage(String url) {
         Platform.runLater(() -> browser.getEngine().load(url));
+        logger.info("Loaded " + url);
     }
 
     /**
@@ -130,6 +167,10 @@ public class BrowserPanel extends UiPart<Region> {
         } catch (Exception e) {
             additionalInfo.setText("This person address cannot be found.");
         }
+
+        String personName = event.getNewSelection().person.getName().toString();
+        EventsCenter.getInstance().post(new NewResultAvailableEvent(String.format(MESSAGE_SELECT_PERSON_SUCCESS,
+                personName)));
         loadPersonDirection(event.getNewSelection().person);
     }
 
@@ -157,6 +198,14 @@ public class BrowserPanel extends UiPart<Region> {
     }
 
     @Subscribe
+    public void handleShowFromHeadQuaterToOneEvent(ShowRouteFromHeadQuarterToOneEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        StringBuilder url = new StringBuilder(SEARCH_PAGE_URL);
+        url.append(event.destination);
+        loadPage(url.toString() + "?dg=dbrw&newdg=1");
+    }
+
+    @Subscribe
     public void handleShowFromOneToAnotherEvent(ShowRouteFromOneToAnotherEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         StringBuilder url = new StringBuilder("https://www.google.com.sg/maps/dir/");
@@ -164,8 +213,17 @@ public class BrowserPanel extends UiPart<Region> {
             url.append(address);
             url.append("/");
         }
+        url.deleteCharAt(url.length() - 1);
         additionalInfo.setText("Estimated Required Time for Deliveries: "
                 + FilterCommand.getDuration(event.sortedList));
-        loadPage(url.toString());
+        loadPage(url.toString() + "?dg=dbrw&newdg=1");
+    }
+
+    @Subscribe
+    public void handleGameEvent(GameEvent event) {
+
+        URL gamePath = MainApp.class.getResource("/games/Snake.html");
+        loadPage(gamePath.toExternalForm());
+        additionalInfo.setText("+ Additional information will be displayed here.");
     }
 }

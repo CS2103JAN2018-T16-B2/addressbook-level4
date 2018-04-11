@@ -61,17 +61,18 @@ public class FilterCommand extends Command {
             return new CommandResult(shown);
         }
 
-        EventsCenter.getInstance().post(new ShowMultiLocationFromHeadQuarterEvent(optimizedRoute));
         //some addresses are invalid
         if (optimizedRoute.size() < numberOfPersonsListed) {
             String shown = getMessageForPersonListShownSummary(numberOfPersonsListed)
                     + "\nAt least one address on "
                     + model.getFilteredPersonList().get(0).getDate().toString()
                     + " cannot be found.";
+            EventsCenter.getInstance().post(new ShowMultiLocationFromHeadQuarterEvent(optimizedRoute));
             return new CommandResult(shown);
         }
 
         //all addresses can be found
+        EventsCenter.getInstance().post(new ShowMultiLocationFromHeadQuarterEvent(optimizedRoute));
         return new CommandResult(getMessageForPersonListShownSummary(numberOfPersonsListed));
     }
 

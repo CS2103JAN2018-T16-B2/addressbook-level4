@@ -23,6 +23,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Person;
 import seedu.address.ui.testutil.EventsCollectorRule;
 
 /**
@@ -43,10 +44,16 @@ public class SelectCommandTest {
     public void execute_validIndexUnfilteredList_success() {
         Index lastPersonIndex = Index.fromOneBased(model.getFilteredPersonList().size());
 
-        assertExecutionSuccess(INDEX_FIRST_PERSON);
-        assertExecutionSuccess(INDEX_THIRD_PERSON);
-        assertExecutionSuccess(lastPersonIndex);
+        //@@author ncaminh
+        Person firstPerson = model.getFilteredPersonList().get(0);
+        Person thirdPerson = model.getFilteredPersonList().get(2);
+        Person lastPerson = model.getFilteredPersonList().get(lastPersonIndex.getZeroBased());
+
+        assertExecutionSuccess(INDEX_FIRST_PERSON, firstPerson);
+        assertExecutionSuccess(INDEX_THIRD_PERSON, thirdPerson);
+        assertExecutionSuccess(lastPersonIndex, lastPerson);
     }
+    //@@author
 
     @Test
     public void execute_invalidIndexUnfilteredList_failure() {
@@ -55,12 +62,15 @@ public class SelectCommandTest {
         assertExecutionFailure(outOfBoundsIndex, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
+    //@@author ncaminh
     @Test
     public void execute_validIndexFilteredList_success() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
-        assertExecutionSuccess(INDEX_FIRST_PERSON);
+        Person firstPerson = model.getFilteredPersonList().get(0);
+        assertExecutionSuccess(INDEX_FIRST_PERSON, firstPerson);
     }
+    //@@author
 
     @Test
     public void execute_invalidIndexFilteredList_failure() {
@@ -95,16 +105,18 @@ public class SelectCommandTest {
         assertFalse(selectFirstCommand.equals(selectSecondCommand));
     }
 
+    //@@author ncaminh
     /**
      * Executes a {@code SelectCommand} with the given {@code index}, and checks that {@code JumpToListRequestEvent}
      * is raised with the correct index.
      */
-    private void assertExecutionSuccess(Index index) {
+    private void assertExecutionSuccess(Index index, Person person) {
         SelectCommand selectCommand = prepareCommand(index);
 
+        String personName = person.getName().toString();
         try {
             CommandResult commandResult = selectCommand.execute();
-            assertEquals(String.format(SelectCommand.MESSAGE_SELECT_PERSON_SUCCESS, index.getOneBased()),
+            assertEquals(String.format(SelectCommand.MESSAGE_SELECT_PERSON_SUCCESS, personName),
                     commandResult.feedbackToUser);
         } catch (CommandException ce) {
             throw new IllegalArgumentException("Execution of command should not fail.", ce);
@@ -113,6 +125,7 @@ public class SelectCommandTest {
         JumpToListRequestEvent lastEvent = (JumpToListRequestEvent) eventsCollectorRule.eventsCollector.getMostRecent();
         assertEquals(index, Index.fromZeroBased(lastEvent.targetIndex));
     }
+    //@@author
 
     /**
      * Executes a {@code SelectCommand} with the given {@code index}, and checks that a {@code CommandException}

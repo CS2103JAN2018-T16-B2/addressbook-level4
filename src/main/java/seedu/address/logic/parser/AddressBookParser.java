@@ -16,6 +16,7 @@ import seedu.address.logic.commands.EmailCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.GameCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
@@ -95,6 +96,9 @@ public class AddressBookParser {
 
         case DistanceCommand.COMMAND_WORD:
             return new DistanceCommandParser().parse(arguments);
+
+        case GameCommand.COMMAND_WORD:
+            return new GameCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

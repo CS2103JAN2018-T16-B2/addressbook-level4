@@ -39,7 +39,9 @@ public class SelectCommand extends Command {
         }
 
         EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex));
-        return new CommandResult(String.format(MESSAGE_SELECT_PERSON_SUCCESS, targetIndex.getOneBased()));
+
+        String personName = lastShownList.get(targetIndex.getZeroBased()).getName().toString();
+        return new CommandResult(String.format(MESSAGE_SELECT_PERSON_SUCCESS, personName));
 
     }
 
