@@ -46,10 +46,10 @@ organize deliveries for the delivery people.</p>
 <p>Justification: This feature improves the product significantly because it provides the option for users to use different profiles (many users can continue to share one profile if preferred). It is more conceivable that different users would have different addressees to send deliveries to and hence having a customised list of addressees would help each user have a better overview of their addressees and perform their deliveries more effectively.</p>
 </li>
 <li>
-<p>Highlights: This enhancement introduces a whole new component that initiates even before the start of the main application, denying access to existing addressee lists to users who do not possess valid login details.</p>
+<p>Highlights: This enhancement introduces a whole new component that initiates even before the start of the main application, denying access to existing addressee lists to users who do not possess valid login details. It also has GUI components which accept keyboard inputs in a user-friendly manner ("Tab" &amp; "Enter") in line with the CLI focus of the main application.</p>
 </li>
 <li>
-<p>Credits: -</p>
+<p>Credits: AddressBook-Level4 project created by SE-EDU initiative at <a href="https://github.com/se-edu/" class="bare">https://github.com/se-edu/</a></p>
 </li>
 </ul>
 </div>
@@ -69,7 +69,10 @@ organize deliveries for the delivery people.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Modified existing guides to include the premises of our project (<a href="https://github.com/CS2103JAN2018-T16-B2/main/pull/5">#5</a>, <a href="https://github.com/CS2103JAN2018-T16-B2/main/pull/7">#7</a>, <a href="https://github.com/CS2103JAN2018-T16-B2/main/pull/15">#15</a>, <a href="https://github.com/CS2103JAN2018-T16-B2/main/pull/44">#44</a>, <a href="https://github.com/CS2103JAN2018-T16-B2/main/pull/126">#126</a>, <a href="https://github.com/CS2103JAN2018-T16-B2/main/pull/148">#148</a>)</p>
+<p>Set up Travis, AppVeyor and Coveralls, as well as the badges for Travis and AppVeyor (<a href="https://github.com/CS2103JAN2018-T16-B2/main/pull/5">#5</a>, <a href="https://github.com/CS2103JAN2018-T16-B2/main/pull/7">#7</a>)</p>
+</li>
+<li>
+<p>Modified existing guides to include the premises of our project (<a href="https://github.com/CS2103JAN2018-T16-B2/main/pull/15">#15</a>, <a href="https://github.com/CS2103JAN2018-T16-B2/main/pull/44">#44</a>, <a href="https://github.com/CS2103JAN2018-T16-B2/main/pull/126">#126</a>, <a href="https://github.com/CS2103JAN2018-T16-B2/main/pull/148">#148</a>)</p>
 </li>
 <li>
 <p>Added documentation for all the features I added in the dev guide and user guide. (<a href="https://github.com/CS2103JAN2018-T16-B2/main/pull/32">#32</a>, <a href="https://github.com/CS2103JAN2018-T16-B2/main/pull/47">#47</a>, <a href="https://github.com/CS2103JAN2018-T16-B2/main/pull/107">#107</a>)</p>
@@ -269,6 +272,52 @@ Feel free to try other commands outlined above when you get the feel of our prog
 </tbody>
 </table>
 <div class="sect2">
+<h3 id="architecture"><a class="link" href="#architecture">Architecture</a></h3>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+A fifth component, the <code>Login</code> component, is omitted in the above diagram to reduce the complexity of the diagram. This component is also run by the <code>MainApp</code> class as further explained below, but will only be run at app launch and subsequently will have limited interaction with the other components, leaving the general architecture of the main application as depicted in the diagram above.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="ui-component"><a class="link" href="#ui-component">UI component</a></h3>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The <code>login</code> component has its own independently running user interface, but the classes used for the <code>login</code> feature are maintained together with those of the main application in the <code>UI</code> component package.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="storage-component"><a class="link" href="#storage-component">Storage component</a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="../images/StorageClassUpdated.png" alt="StorageClassUpdated" width="800">
+</div>
+<div class="title">Figure 1. Structure of the Storage Component</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>can save the <code>UserPass</code> data in json format and read it back.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
 <h3 id="login-component"><a class="link" href="#login-component">Login component</a></h3>
 <div class="paragraph">
 <p>The <code>Login</code> component,</p>
@@ -316,7 +365,7 @@ Upon successful verification, the user will be brought to a user-customised vers
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-13 07:02:24 UTC
+Last updated 2018-04-13 07:54:47 UTC
 </div>
 </div>
 </body>

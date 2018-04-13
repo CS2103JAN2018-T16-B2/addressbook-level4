@@ -313,6 +313,18 @@ Having both Travis and AppVeyor ensures your App works on both Unix-based platfo
 <div class="paragraph">
 <p>The <strong><em>Architecture Diagram</em></strong> given above explains the high-level design of the App. Given below is a quick overview of each component.</p>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+A fifth component, the <code>Login</code> component, is omitted in the above diagram to reduce the complexity of the diagram. This component is also run by the <code>MainApp</code> class as further explained below, but will only be run at app launch and subsequently will have limited interaction with the other components, leaving the general architecture of the main application as depicted in the diagram above.
+</td>
+</tr>
+</table>
+</div>
 <div class="admonitionblock tip">
 <table>
 <tr>
@@ -472,6 +484,18 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 </li>
 </ul>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The <code>login</code> component has its own independently running user interface, but the classes used for the <code>login</code> feature are maintained together with those of the main application in the <code>UI</code> component package.
+</td>
+</tr>
+</table>
+</div>
 </div>
 <div class="sect2">
 <h3 id="Design-Logic"><a class="link" href="#Design-Logic">2.3. Logic component</a></h3>
@@ -569,6 +593,9 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 </li>
 <li>
 <p>can save the Address Book data in xml format and read it back.</p>
+</li>
+<li>
+<p>can save the <code>UserPass</code> data in json format and read it back.</p>
 </li>
 </ul>
 </div>
@@ -702,6 +729,10 @@ Upon successful verification, the user will be brought to a user-customised vers
 <div class="content">
 <img src="images/LoginDetails.png" alt="LoginDetails" width="800">
 </div>
+</div>
+<div class="paragraph">
+<p>The <code>login</code> feature thus has limited interactions with the other components of the application after successful verification.
+This, however, may change in v2.0 when encryption of the Pigeons address book is built in and integrated with the profile created by the <code>login</code> component.</p>
 </div>
 </div>
 </div>
@@ -2287,7 +2318,7 @@ maps out ideal routes for drivers</p>
 </tbody>
 </table>
 <div class="paragraph">
-<p><em>{More to be added}</em></p>
+<p><em>{User stories are added/updated subsequently through issues in GitHub as the project develops through iterative feedback}</em></p>
 </div>
 </div>
 </div>
@@ -2416,7 +2447,10 @@ maps out ideal routes for drivers</p>
 <h2 id="product-survey"><a class="link" href="#product-survey">Appendix G: Product Survey</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><strong>Product Name</strong></p>
+<p>Below is a sample of how a product survey may be documented:</p>
+</div>
+<div class="paragraph">
+<p><strong>Pigeons</strong></p>
 </div>
 <div class="paragraph">
 <p>Author: &#8230;&#8203;</p>
@@ -2480,7 +2514,7 @@ These instructions only provide a starting point for testers to work on; testers
 </li>
 <li>
 <p>Double-click the jar file<br>
-Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.</p>
+Expected: Shows the login screen GUI, and after successful login, it shows GUI with a set of sample contacts. The window size may not be optimum.</p>
 </li>
 </ol>
 </div>
@@ -2500,9 +2534,6 @@ Expected: The most recent window size and location is retained.</p>
 </div>
 </li>
 </ol>
-</div>
-<div class="paragraph">
-<p><em>{ more test cases &#8230;&#8203; }</em></p>
 </div>
 </div>
 <div class="sect2">
@@ -2525,16 +2556,13 @@ Expected: First contact is deleted from the list. Details of the deleted contact
 Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.</p>
 </li>
 <li>
-<p>Other incorrect delete commands to try: <code>delete</code>, <code>delete x</code> (where x is larger than the list size) <em>{give more}</em><br>
+<p>Other incorrect delete commands to try: <code>delete</code>, <code>delete x</code> (where x is larger than the list size)<br>
 Expected: Similar to previous.</p>
 </li>
 </ol>
 </div>
 </li>
 </ol>
-</div>
-<div class="paragraph">
-<p><em>{ more test cases &#8230;&#8203; }</em></p>
 </div>
 </div>
 <div class="sect2">
@@ -2546,15 +2574,12 @@ Expected: Similar to previous.</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p><em>{explain how to simulate a missing/corrupted file and the expected behavior}</em></p>
+<p>Delete the data folder or corrupted file and repeat commands. A new data folder/file should be auto-generated and auto-saved again.</p>
 </li>
 </ol>
 </div>
 </li>
 </ol>
-</div>
-<div class="paragraph">
-<p><em>{ more test cases &#8230;&#8203; }</em></p>
 </div>
 </div>
 </div>
@@ -2562,7 +2587,7 @@ Expected: Similar to previous.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-13 07:02:24 UTC
+Last updated 2018-04-13 07:54:47 UTC
 </div>
 </div>
 </body>
