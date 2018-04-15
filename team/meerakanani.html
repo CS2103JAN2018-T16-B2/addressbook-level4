@@ -342,12 +342,36 @@ the distances are measured recursively from the new starting point, sorted by di
 </div>
 </div>
 </div>
+<div class="sect2">
+<h3 id="filtering-person-by-date"><a class="link" href="#filtering-person-by-date">Filtering person by date</a></h3>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: There list is not empty.</p>
+</li>
+<li>
+<p>Test case: <code>filter 2018-03-03</code> (assuming that there is at least 1 person has the delivery date 2018-03-03)<br>
+Expected: The command result panel shows the number of persons with the delivery date "2018-03-03" and have valid, existing address. If there is any invalid, non-existing address then the
+command result panel also shows message saying that there is at least 1 invalid or non-existing address. The main display panel loads the "optimized route" on Google Map from the <code>Headquarter</code>
+to all the "findable" address. Status bar remains the same.</p>
+</li>
+<li>
+<p>Test case: <code>filter 2018-02-30</code> (assuming that there is no person with this delivery date)
+Expected: The command result panel shows message saying that no person is listed. Status bar remains the same.</p>
+</li>
+<li>
+<p>Other incorrect filter commands to try: <code>filter</code>, <code>filter 2018 03 03</code><br>
+Expected: Error message from command result pane. Status bar remains the same.</p>
+</li>
+</ol>
+</div>
+</div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-13 11:24:08 UTC
+Last updated 2018-04-15 07:42:59 UTC
 </div>
 </div>
 </body>

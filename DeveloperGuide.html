@@ -58,6 +58,7 @@
 <li><a href="#logging">3.8. Logging</a></li>
 <li><a href="#Implementation-Configuration">3.9. Configuration</a></li>
 <li><a href="#retrieving-distance-from-a-person-address-to-another-person-address">3.10. Retrieving distance from a person address to another person address</a></li>
+<li><a href="#virtual-assistant-script-based-reader">3.11. Virtual assistant (script based reader)</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a>
@@ -105,6 +106,9 @@
 <li><a href="#launch-and-shutdown">H.1. Launch and Shutdown</a></li>
 <li><a href="#deleting-a-person">H.2. Deleting a person</a></li>
 <li><a href="#saving-data">H.3. Saving data</a></li>
+<li><a href="#virtual-assistant">H.4. Virtual assistant</a></li>
+<li><a href="#retrieving-distance-from-2-end-points">H.5. Retrieving distance from 2 end points</a></li>
+<li><a href="#filtering-person-by-date">H.6. Filtering person by date</a></li>
 </ul>
 </li>
 </ul>
@@ -1136,6 +1140,60 @@ The information related to the itinerary are collected by the <code>EmailCommand
 <div class="imageblock">
 <div class="content">
 <img src="images/getDistanceOfPersonSdForLogic.png" alt="getDistanceOfPersonSdForLogic" width="800">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="virtual-assistant-script-based-reader"><a class="link" href="#virtual-assistant-script-based-reader">3.11. Virtual assistant (script based reader)</a></h3>
+<div class="sect3">
+<h4 id="running-scripts"><a class="link" href="#running-scripts">3.11.1. Running scripts:</a></h4>
+<div class="paragraph">
+<p>If the user operating system is either <code>Window</code> or <code>Mac OS</code> then every time, right after logging in, the system will run a script says "Welcome user". Moreover, whenever the user click on
+a person card or use <code>Select command</code> to prefer to a person card, the system will read out "This is + <code>the person name</code> ".</p>
+</div>
+<div class="paragraph">
+<p>We use <code>Runtime.java</code> in <code>java.lang</code> package to <code>execute</code> the scripts via the corresponding executor (<code>osascript</code> for <code>Mac</code> and <code>wscript</code> for <code>Window</code>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="creating-scripts"><a class="link" href="#creating-scripts">3.11.2. Creating scripts</a></h4>
+<div class="ulist">
+<ul>
+<li>
+<p>For Window:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>First, the program will create folder <code>script</code> if it is not existed.</p>
+</li>
+<li>
+<p>Then in the <code>script</code> folder, the program will look for the corresponding <code>vbs</code> script. If the script is not existed,</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Our system will use <code>File.java</code> to automatically create a <code>text</code> file and fill in the needed info for the <code>vbs</code> script file.</p>
+</li>
+<li>
+<p>After that, we will convert the <code>text</code> file into the <code>vbs</code> file using <code>File.java</code>.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>For Mac:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>The program will not need to create any folder or script file but rather initialize a <code>String</code> array with
+all the contents of the script.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -2519,6 +2577,25 @@ These instructions only provide a starting point for testers to work on; testers
 <p>Double-click the jar file<br>
 Expected: Shows the login screen GUI, and after successful login, it shows GUI with a set of sample contacts. The window size may not be optimum.</p>
 </li>
+<li>
+<p>Key in the username and password. Create a new account if you don&#8217;t have one.<br>
+Expected after logging in: The system speaks out "Welcome user" (for Window and Mac only) and the Pigeon application is now ready to be used.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Login settings</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Create an account for the same username more than once (not case-sensitive).<br>
+Expected: Creation of a profile for the same username as one that exists already should not be allowed.</p>
+</li>
+<li>
+<p>Try a different password than the one used for creating the account (not case-sensitive).<br>
+Expected: It should deny you entry into the application until the correct password is keyed in.</p>
+</li>
 </ol>
 </div>
 </li>
@@ -2585,12 +2662,125 @@ Expected: Similar to previous.</p>
 </ol>
 </div>
 </div>
+<div class="sect2">
+<h3 id="virtual-assistant"><a class="link" href="#virtual-assistant">H.4. Virtual assistant</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Reads out a person name and show route from the Headquarter to the person address:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: The last shown list is not empty. The first person in the last shown list has a valid, existing address.</p>
+</li>
+<li>
+<p>Test case: <code>click on the first person card</code> or use command <code>select 1</code><br>
+Expected: The system reads out "This is + <code>the first person name</code> " and the main display panel loads the route on Google Map from the <code>Headquarter</code>
+to the <code>first person address</code>. Status bar remains the same.</p>
+</li>
+<li>
+<p>Test case: <code>click on a person card</code> or use command <code>select</code> to select a person with an invalid address (such as: "Dummy Address")<br>
+Expected: The system reads out "This is + <code>the person name</code> " and the main display panel either loads only the location on Google Map of the <code>Headquarter</code>
+or the route from the <code>Headquarter</code> to an address which might sounds alike (auto generated by Google Map). Status bar remains the same.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="retrieving-distance-from-2-end-points"><a class="link" href="#retrieving-distance-from-2-end-points">H.5. Retrieving distance from 2 end points</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Retrieving distance from <code>Headquarter</code> to a <code>person address</code>  :</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: The last shown list is not empty. The first person in the last shown list has a valid, existing address.</p>
+</li>
+<li>
+<p>Test case: <code>distance 1</code><br>
+Expected: The command result panel shows the distance from the <code>Headquarter</code> to the <code>first person address</code> and the main display panel loads the route on Google Map from the <code>Headquarter</code>
+to the <code>first person address</code>. Status bar remains the same.</p>
+</li>
+<li>
+<p>Test case: <code>distance x</code> with x is the index of a person with invalid or non-existing address<br>
+Expected: The command result panel shows "Unable to find + <code>person name</code> + address" and the main display panel either loads only the location on Google Map of the <code>Headquarter</code>
+or the route from the <code>Headquarter</code> to an address which might sounds alike (auto generated by Google Map). Status bar remains the same.</p>
+</li>
+<li>
+<p>Test case: <code>distance 0</code><br>
+Expected: Error details shown in the command result panel. Status bar remains the same.</p>
+</li>
+<li>
+<p>Other incorrect distance commands to try: <code>distance</code>, <code>distance x</code> (where x is larger than the list size)<br>
+Expected: Similar to previous.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Retrieving distance from a <code>person address</code> to another <code>person address</code> :</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: The last shown list has more than 1 person. The first person and the second in the last shown list have valid, existing addresses.</p>
+</li>
+<li>
+<p>Test case: <code>distance 1 2</code><br>
+Expected: The command result panel shows the distance from the <code>first person address</code> to the <code>second person address</code> and the main display panel loads the route on Google Map from the <code>first person address</code>
+to the <code>second person address</code>. Status bar remains the same.</p>
+</li>
+<li>
+<p>Test case: <code>distance 1 x</code> with x is the index of a person with invalid or non-existing address<br>
+Expected: The command result panel shows "Unable to find at least on address" and the main display panel either loads only the location on Google Map of one of the addresses or the route from the addressed which might sound alike (auto generated by Google Map). Status bar remains the same.</p>
+</li>
+<li>
+<p>Test case: <code>distance 0 1</code><br>
+Expected: Error details shown in the command result panel. Status bar remains the same.</p>
+</li>
+<li>
+<p>Other incorrect distance commands to try: <code>distance</code>, <code>distance 0 x</code>, <code>distance x y</code> (where x and y are larger than the list size)<br>
+Expected: Similar to previous.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="filtering-person-by-date"><a class="link" href="#filtering-person-by-date">H.6. Filtering person by date</a></h3>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: There list is not empty.</p>
+</li>
+<li>
+<p>Test case: <code>filter 2018-03-03</code> (assuming that there is at least 1 person has the delivery date 2018-03-03)<br>
+Expected: The command result panel shows the number of persons with the delivery date "2018-03-03" and have valid, existing address. If there is any invalid, non-existing address then the
+command result panel also shows message saying that there is at least 1 invalid or non-existing address. The main display panel loads the "optimized route" on Google Map from the <code>Headquarter</code>
+to all the "findable" address. Status bar remains the same.</p>
+</li>
+<li>
+<p>Test case: <code>filter 2018-02-30</code> (assuming that there is no person with this delivery date)
+Expected: The command result panel shows message saying that no person is listed. Status bar remains the same.</p>
+</li>
+<li>
+<p>Other incorrect filter commands to try: <code>filter</code>, <code>filter 2018 03 03</code><br>
+Expected: Error message from command result pane. Status bar remains the same.</p>
+</li>
+</ol>
+</div>
+</div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-13 11:24:08 UTC
+Last updated 2018-04-15 07:42:59 UTC
 </div>
 </div>
 </body>
