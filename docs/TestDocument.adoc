@@ -57,5 +57,5 @@ http://google.com[This] is a link to an external site.
 
 image::Architecture.png[title="Architecture diagram", width="400"]
 ____
-This is a quote block.
+This is a quote block g.
 ____
