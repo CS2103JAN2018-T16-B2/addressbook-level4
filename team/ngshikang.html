@@ -335,12 +335,20 @@ such that each user (Pigeon/Delivery Driver) can have a personalised list of cus
 in a paired structure <code>UserPass</code> stored in a json file in the implemented class <code>JsonUserPassStorage</code>
 which implements <code>UserPassStorage</code>.</p>
 </li>
-<li>
-<p><code>UserPass</code> consists of two Strings, the first being the username and the second being the password.
+</ul>
+</div>
+<div class="paragraph">
+<p>With regards to the implementation of the structures described above, <code>UserPass</code> consists of two Strings, the first being the username and the second being the password.
 The password is automatically hashed by the SHA-256 algorithm upon <code>UserPass</code> creation. A static <code>hash</code> method
 is provided in the <code>UserPass</code> class if SHA-256 hashing is required for any password verification.</p>
-</li>
-</ul>
+</div>
+<div class="paragraph">
+<p>A class diagram depicting the behaviours and relationships for <code>UserPass</code>, <code>UserPassStorage</code> and <code>JsonUserPassStorage</code> are shown below.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/login_class_diagram.png" alt="login class diagram" width="800">
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -394,7 +402,7 @@ Expected: It should deny you entry into the application until the correct passwo
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-15 14:18:14 UTC
+Last updated 2018-04-15 14:27:01 UTC
 </div>
 </div>
 </body>
