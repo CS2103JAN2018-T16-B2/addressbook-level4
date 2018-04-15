@@ -286,7 +286,6 @@ Format: `distance INDEX (INDEX)`
 load the distance from the first person to the second person.
 * The index refers to the index number shown in the most recent listing.
 * The index *must be a positive integer* `1, 2, 3, ...`
-* **The person(s) address(es) should be valid, existing. Else, the program might auto-generated some other address(ed).**
 ****
 
 Examples:

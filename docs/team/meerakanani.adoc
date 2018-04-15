@@ -146,14 +146,3 @@ This sorted Hashmap now contains the key with the orign and destination address 
 constantly used to make sure the addresses are sorted by distances as the distances are being calculated. It is important that the distances are not only
 sorted by distance but also in an optimal route. If the shortest distance is from A to B the next part of the route has to be starting from B. Therefore,
 the distances are measured recursively from the new starting point, sorted by distance and then added to the final route.
-
-=== Filtering person by date
-.. Prerequisites: There list is not empty.
-.. Test case: `filter 2018-03-03` (assuming that there is at least 1 person has the delivery date 2018-03-03) +
-   Expected: The command result panel shows the number of persons with the delivery date "2018-03-03" and have valid, existing address. If there is any invalid, non-existing address then the
-   command result panel also shows message saying that there is at least 1 invalid or non-existing address. The main display panel loads the "optimized route" on Google Map from the `Headquarter`
-   to all the "findable" address. Status bar remains the same.
-.. Test case: `filter 2018-02-30` (assuming that there is no person with this delivery date)
-   Expected: The command result panel shows message saying that no person is listed. Status bar remains the same.
-.. Other incorrect filter commands to try: `filter`, `filter 2018 03 03` +
-   Expected: Error message from command result pane. Status bar remains the same.
